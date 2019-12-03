@@ -1,4 +1,6 @@
-Refer blogpost "mulesoft – part 10 ( cxf )" for more documentation. 
+Refer blog for more documentation. 
+	site: https://code2blog.wordpress.com
+	post:  "mulesoft – part 10 ( cxf )" 
 
 This project exposes a wsdl file on port 8081
 You can invoke it using this url http://localhost:8081/as_webservice?wsdl
