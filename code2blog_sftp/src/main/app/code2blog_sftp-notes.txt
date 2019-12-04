@@ -1,0 +1,62 @@
+INFO  2019-12-04 21:36:46,546 [main] org.mule.transport.sftp.SftpConnector: Connected: SftpConnector
+{
+  name=SFTP
+  lifecycle=initialise
+  this=2e060819
+  numberOfConcurrentTransactedReceivers=4
+  createMultipleTransactedReceivers=true
+  connected=true
+  supportedProtocols=[sftp]
+  serviceOverrides=<none>
+}
+
+INFO  2019-12-04 21:36:46,547 [main] org.mule.transport.sftp.SftpConnector: Starting: SftpConnector
+{
+  name=SFTP
+  lifecycle=initialise
+  this=2e060819
+  numberOfConcurrentTransactedReceivers=4
+  createMultipleTransactedReceivers=true
+  connected=true
+  supportedProtocols=[sftp]
+  serviceOverrides=<none>
+}
+
+INFO  2019-12-04 21:36:46,548 [main] org.mule.lifecycle.AbstractLifecycleManager: Starting connector: SFTP
+INFO  2019-12-04 21:36:46,548 [main] org.mule.transport.file.FileConnector: Connected: FileConnector
+{
+  name=File
+  lifecycle=initialise
+  this=1d75e7af
+  numberOfConcurrentTransactedReceivers=4
+  createMultipleTransactedReceivers=true
+  connected=true
+  supportedProtocols=[file]
+  serviceOverrides=<none>
+}
+
+INFO  2019-12-04 21:36:46,549 [main] org.mule.transport.file.FileConnector: Starting: FileConnector
+{
+  name=File
+  lifecycle=initialise
+  this=1d75e7af
+  numberOfConcurrentTransactedReceivers=4
+  createMultipleTransactedReceivers=true
+  connected=true
+  supportedProtocols=[file]
+  serviceOverrides=<none>
+}
+
+INFO  2019-12-04 21:30:27,337 [[tutorials_point_examples].as_sftpFlow.stage1.02] org.mule.api.processor.LoggerMessageProcessor: {loggerUid=Logger-IN, messageFlow=as_sftp, inboundPr
+operties={filename=file1.txt, originalFilename=file1.txt, MULE_ORIGINATING_ENDPOINT=endpoint.sftp.localdocker.22.home.docker.testMuleSoft}, outboundProperties={}, payload=SftpInput
+Stream{fileName='file1.txt' from endpoint=sftp://docker:****@localdocker:22/home/docker/testMuleSoft} }
+
+INFO  2019-12-04 21:30:27,448 [[tutorials_point_examples].File.dispatcher.01] org.mule.lifecycle.AbstractLifecycleManager: Initialising: 'File.dispatcher.1171624980'. Object is: Fi
+leMessageDispatcher
+
+INFO  2019-12-04 21:30:27,451 [[tutorials_point_examples].File.dispatcher.01] org.mule.lifecycle.AbstractLifecycleManager: Starting: 'File.dispatcher.1171624980'. Object is: FileMe
+ssageDispatcher
+
+INFO  2019-12-04 21:30:27,466 [[tutorials_point_examples].File.dispatcher.01] org.mule.transport.file.FileConnector: Writing file to: D:\vishnu\workspace\muleesb-welcome\data\deliv
+er\file1.txt
+
