@@ -2,6 +2,7 @@ I will use tags to identify a unit of work.
 
 code2blog_cxf
 	cxf-1 -> expose wsdl and respond to soap operation call
+	cxf-2 -> create a consumer webservice that accepts http query parameters and invokes a soap webservice
 
 code2blog-sftp
 	sftp-1 -> acquire file from sftp server

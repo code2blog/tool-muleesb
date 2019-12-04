@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd">
+    <http:request-config name="HTTP_Request_Configuration" host="localhost" port="8081" doc:name="HTTP Request Configuration"/>
+    <flow name="as_soapconsumerFlow" doc:description="Use amp-hex-value-semicolon for new line in configuration-xml file. Use some script to set value. 
+Do not use in UI.
+For SubFlow-InvokeClient loggers, only log payload. 
+For http-source-listener log input-properties
+
+
+Logger-IN
+Logger-OUT
+Logger-InProvider
+Logger-OutProvider
+Logger-OutSubflow
+">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/as_soapconsumer" allowedMethods="GET,POST" doc:name="HTTP">
+            <http:response-builder statusCode="200"/>
+        </http:listener>
+        <response>
+            <logger message="{loggerUid=Logger-OUT, messageFlow=as_soapconsumer, inboundProperties=#[message.inboundProperties], outboundProperties=#[message.outboundProperties], payload=#[payload], payloadAs=#[message.payloadAs(java.lang.String)], flowVarProviderResponse=#[flowVars.providerResponse] }" level="INFO" doc:name="Logger-OUT" doc:description="Logs output message sent to consumer
+
+{loggerUid=Logger-OUT, messageFlow=as_soapconsumer, inboundProperties=#[message.inboundProperties], outboundProperties=#[message.outboundProperties], payload=#[payload], payloadAs=#[message.payloadAs(java.lang.String)], flowVarProviderResponse=#[flowVars.providerResponse] }
+"/>
+            <dw:transform-message doc:name="Transform Message">
+                <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	headers: inboundProperties,
+	payload: payload
+}]]></dw:set-payload>
+            </dw:transform-message>
+        </response>
+        <logger message="{loggerUid=Logger-IN, messageFlow=as_soapconsumer, inboundProperties=#[message.inboundProperties], outboundProperties=#[message.outboundProperties], payload=#[payload] }" level="INFO" doc:name="Logger-IN" doc:description="Logs input message
+
+{loggerUid=Logger-IN, messageFlow=as_soapconsumer, inboundProperties=#[message.inboundProperties], outboundProperties=#[message.outboundProperties], payload=#[payload] }
+
+"/>
+        <flow-ref name="as_soapconsumerSub_Flow" doc:name="Flow Reference - as_soapconsumerSub_Flow"/>
+    </flow>
+    <sub-flow name="as_soapconsumerSub_Flow">
+        <expression-component doc:name="Expression" doc:description="prepare request java object (LoginRequest) used in CXF"><![CDATA[import as.soapconsumer.LoginRequest;
+LoginRequest request = new LoginRequest();
+
+request.setName(message.inboundProperties['http.query.params'].username);
+request.setPassword(message.inboundProperties['http.query.params'].password);
+request.setUserType(1);
+payload= request;]]></expression-component>
+        <cxf:jaxws-client operation="verify" serviceClass="as.soapconsumer.LoginIntf" soapVersion="1.2" metadata:id="e610ddef-7e23-49de-b9ae-41f875995980" doc:name="CXF - jax ws client" doc:description="use LoginRequest.java to create a soap message. LoginRequest is used as argument to verify method of LogIntf webservice 
+
+&lt;soap:Envelope xmlns:soap=&quot;http://www.w3.org/2003/05/soap-envelope&quot;&gt;&lt;soap:Body&gt;&lt;ns2:verify xmlns:ns2=&quot;http://soapconsumer.as/&quot;&gt;&lt;arg0&gt;&lt;userType&gt;1&lt;/userType&gt;&lt;/arg0&gt;&lt;/ns2:verify&gt;&lt;/soap:Body&gt;&lt;/soap:Envelope&gt;"/>
+        <flow-ref name="as_soapconsumerSub_Flow-InvokeProvider" doc:name="Flow Reference - as_soapconsumerSub_Flow-InvokeProvider"/>
+        <object-to-string-transformer doc:name="Object to String" doc:description="This component is not converting payload=as.soapconsumer.LoginResponse@67f16ce7 to java.lang.String when used in Logger-OUT.
+But you will notice Logger-OutSubFlow will log as string. Hence using Set Flow Variable. "/>
+        <set-variable variableName="providerResponse" value="#[payload]" doc:name="Variable - set providerResponse" doc:description="i see payload=as.soapconsumer.LoginResponse@67f16ce7 at Logger-OUT 
+Hence using variable"/>
+        <logger message="{loggerUid=Logger-OutSubflow, messageFlow=as_soapconsumer, payload=#[payload] }" level="INFO" doc:name="Logger-OutSubflow" doc:description="logs output message of subflow
+
+{loggerUid=Logger-OutSubflow, messageFlow=as_soapconsumer, payload=#[payload] }
+"/>
+    </sub-flow>
+    <sub-flow name="as_soapconsumerSub_Flow-InvokeProvider">
+        <logger message="{loggerUid=Logger-InProvider, messageFlow=as_soapconsumer, payload=#[message.payloadAs(java.lang.String)] }" level="INFO" doc:name="Logger-InProvider" doc:description="Logs input message for provider
+
+{loggerUid=Logger-InProvider, messageFlow=as_soapconsumer, payload=#[message.payloadAs(java.lang.String)] }
+"/>
+        <http:request config-ref="HTTP_Request_Configuration" path="/vp_soapprovider" method="POST" doc:name="HTTP"/>
+        <logger message="{loggerUid=Logger-OutProvider, messageFlow=as_soapconsumer, payload=#[message.payloadAs(java.lang.String)] }" level="INFO" doc:name="Logger-OutProvider" doc:description="log output message from provider
+
+{loggerUid=Logger-OutProvider, messageFlow=as_soapconsumer, payload=#[message.payloadAs(java.lang.String)] }"/>
+    </sub-flow>
+</mule>
