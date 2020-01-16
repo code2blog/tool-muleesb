@@ -9,6 +9,7 @@ code2blog-sftp
 	
 code2blog-poll
 	poll-1 -> poll folder in some interval
+	poll-2 -> Read employeeList in csv form and print json employeeList to console
 	
 Why do I use commit tags ?
 	Here JIRA-123. JIRA-124 are the sample commit tags. 
