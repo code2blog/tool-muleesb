@@ -18,6 +18,13 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 
     <http:request-config name="HTTP_Request_Configuration" host="localhost" port="8081" doc:name="HTTP Request Configuration"/>
 
+   <configuration doc:name="Configuration"> 
+	    <expression-language autoResolveVariables="true">
+    	    <import class="org.mule.util.StringUtils" />
+    	</expression-language>
+	</configuration>
+
+
 	<flow name="global_elementsFlow">
 		<http:listener config-ref="HTTP_Listener_Configuration"
 			path="/global_elements" doc:name="HTTP" />

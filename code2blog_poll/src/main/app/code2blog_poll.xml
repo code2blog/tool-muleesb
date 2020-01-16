@@ -45,15 +45,32 @@ So using polling at 30 second interval">
 
 	</flow>
 
+
     <sub-flow name="subflow_persistToMongodb">
         <logger message="Logger-persistToMongodb-place holder" level="INFO" doc:name="Logger-persistToMongodb-place holder"/>
     </sub-flow>
 
+
 	<sub-flow name="code2blog_pollSub_Flow_LineParser">
-        <logger message="Logger-line parser-place holder" level="INFO" doc:name="Logger-line parser-place holder"/>
+		<logger
+			message="loggerUid=Logger-03, messageFlow=as_file_parse_to_db, description='entire file content in payload', payload=#[payload] }  "
+			level="INFO" doc:name="Logger-03 log entire file content"
+			doc:description="loggerUid=Logger-03s, messageFlow=as_file_parse_to_db, description='entire file content in payload', payload=#[payload] }  
+" />
+		<expression-transformer
+			expression="#[StringUtils.split(message.payload,'\n\r');]" doc:name="Expression - split by newline"
+			returnSourceIfNull="true" />
+		<foreach collection="#[message.payload]" counterVariableName="linecounter"
+			rootMessageVariableName="lineRootMessage" doc:name="For Each">
+			<flow-ref name="code2blog_pollSub_Flow_fileTokenizer" 
+							doc:name="subflow_fileTokenizer" />
+		</foreach>
 	</sub-flow>
+
 
 	<sub-flow name="code2blog_pollSub_Flow_fileTokenizer">
         <logger message="Logger-file tokenizer-place holder" level="INFO" doc:name="Logger-file tokenizer-place holder"/>
 	</sub-flow>
+
+
 </mule>
