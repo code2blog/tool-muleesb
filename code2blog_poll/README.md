@@ -37,7 +37,7 @@ INFO  2020-01-14 19:05:33,103 [[code2blog_poll].HTTP_Listener_Configuration.work
 
 <pre>
 I have to develop a method to capture bread crumb information into logs when I find time. Here is the simple logic to accomplish it. Each time logger component is invoked, it invokes a function that append loggerUid in global-variable and prints the same to console resulting in bread-crumb that looks like …
-Logger-IN  Logger-SF1  Logger-SF2  Logger-OUT
+Logger-IN --> Logger-SF1 --> Logger-SF2 --> Logger-OUT
 
 </pre>
 
