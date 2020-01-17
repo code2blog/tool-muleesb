@@ -1,10 +1,12 @@
 
 Logger output should be of this template
 
-<pre>
-{uid=Logger-IN, messageFlow=abc, description=abc, inboundProperties=#[message.inboundProperties], payload=#[payload] }          
+Logger Message should be duplicated in Notes tab, as it is easier to view and manipulate it from Multiline editor in Notes tab instead of Singleline editor in General tab. 
 
-{uid=Logger-OUT, messageFlow=abc, description=abc inboundProperties=#[message.inboundProperties], outboundProperties=#[message.outboundProperties], payload=#[payload] }
+<pre>
+{uid=Logger-IN, file=abc.xml, description=abc, inboundProperties=#[message.inboundProperties], payload=#[payload] }          
+
+{uid=Logger-OUT, file=abc.xml, description=abc inboundProperties=#[message.inboundProperties], outboundProperties=#[message.outboundProperties], payload=#[payload] }
 
 </pre>
 
@@ -14,7 +16,7 @@ Logger output should be of this template
 
     inboundProperties, payload, outboundProperties – these are fields with multi value elements. Example shown below.
 
-    messageFlow – name of the mulesoft flow or xml file. 
+    file – name of the mulesoft message flow xml file. 
     In some cases, flow name [code2blog_pollFlow] printed to console includes, filename [code2blog_poll.xml]. See LogSection-1.
     In other cases, file name will not be printed to console. Only project name will be printed. See LogSection-2. Hence it is necessary to include messageFlow field as a parameter that gets printed to console logs. 
 
