@@ -1,4 +1,4 @@
-You can invoke it using this url http://localhost:8081/glbal_elements  <br>
+You can invoke it using this url http://localhost:8081/global_elements  <br>
 <pre>
 I have chosen to retain all my global configurations in one file for easy maintenance 
 -	With one global configuration file, you can copy the settings to a new project without conflict 
