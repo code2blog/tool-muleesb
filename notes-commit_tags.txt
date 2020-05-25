@@ -16,6 +16,10 @@ standards
 
 code2blog_wsdl
 	wsdl-1 -> start with a wsdl and expose soap webservice
+
+code2blog_variables
+	var-1 -> demo the features of flow variables
+	
 	
 Why do I use commit tags ?
 	Here JIRA-123. JIRA-124 are the sample commit tags. 

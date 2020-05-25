@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+    <flow name="code2blog_flow_variable_01Flow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/code2blog_flow_variable_01" doc:name="HTTP"/>
+        <response>
+            <logger message="{loggerUid=Logger-flow-01, file=code2blog_flow_variable_01.xml, description='logs flow variable that comes out of flow reference', flowVar01=#[flowVars.flowVar01] }" level="INFO" doc:name="Logger-OUT" doc:description="Logs output of first flow
+
+{loggerUid=Logger-flow-01, file=code2blog_flow_variable_01.xml, description='logs flow variable that comes out of flow reference', flowVar01=#[flowVars.flowVar01] }
+"/>
+        </response>
+        <set-variable doc:name="Variable" value="#[String.format('random value [%d] set in first flow. ', new Random().nextInt())]" variableName="flowVar01"/>
+        <flow-ref name="code2blog_flow_variable_02Flow" doc:name="code2blog_flow_variable_02Flow"/>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	variables: {
+		flowVar: flowVars.flowVar01	
+	}
+}]]></dw:set-payload>
+        </dw:transform-message>
+    </flow>
+</mule>
