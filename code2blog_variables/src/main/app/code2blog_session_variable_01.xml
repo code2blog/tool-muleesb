@@ -18,7 +18,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 "/>
             <dw:transform-message doc:name="Transform Message">
                 <dw:set-payload><![CDATA[%dw 1.0
-%output application/java
+%output application/json 
 ---
 {
 	variables: {
@@ -29,5 +29,6 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
             </dw:transform-message>
         </response>
         <set-session-variable variableName="sessionVariable01" value="#[String.format('random value [%d] set in first flow for sessionVariable01. ', new Random().nextInt())]" doc:name="Session Variable - Set"/>
+        <http:request config-ref="HTTP_Request_Configuration" path="/code2blog_session_variable_02" method="GET" doc:name="HTTP - request"/>
     </flow>
 </mule>
