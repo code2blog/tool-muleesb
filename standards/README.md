@@ -1,5 +1,5 @@
 <br>
-	Refer these links for more details on this <br>
+	Refer these links for more details <br>
 		https://code2blog.wordpress.com/  <br>
 		https://youtube.com/results?search_query=code2blog <br>
 		
