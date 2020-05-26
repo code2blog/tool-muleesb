@@ -11,7 +11,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
     <flow name="code2blog_flow_variable_01Flow">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/code2blog_flow_variable_01" doc:name="HTTP"/>
         <response>
-            <logger message="{loggerUid=Logger-flow-01, file=code2blog_flow_variable_01.xml, description='logs flow variable that comes out of flow reference', flowVar01=#[flowVars.flowVar01] }" level="INFO" doc:name="Logger-OUT" doc:description="Logs output of first flow
+            <logger message="{loggerUid=Logger-flow-01, file=code2blog_flow_variable_01.xml, description='logs flow variable that comes out of flow reference', flowVar01=#[flowVars.flowVar01] }" level="INFO" doc:name="Logger-flow-01" doc:description="Logs output of first flow
 
 {loggerUid=Logger-flow-01, file=code2blog_flow_variable_01.xml, description='logs flow variable that comes out of flow reference', flowVar01=#[flowVars.flowVar01] }
 "/>
