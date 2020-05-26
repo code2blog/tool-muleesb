@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd">
+    <flow name="code2blog_session_variable_04Flow">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="vmQueue01" doc:name="VM"/>
+        <logger level="INFO" doc:name="Logger-flow-02" doc:description="log variables passed into second flow
+
+{loggerUid=Logger-flow-02, file=code2blog_session_variable_04.xml, description='logs variables set in first flow', flowVariable01=#[flowVars.flowVariable01], sessionVariable01=#[sessionVars.sessionVariable01] }" message="{loggerUid=Logger-flow-02, file=code2blog_session_variable_04.xml, description='logs variables set in first flow', flowVariable01=#[flowVars.flowVariable01], sessionVariable01=#[sessionVars.sessionVariable01] }"/>
+        <expression-component doc:name="Expression"><![CDATA[sessionVars.sessionVariable01 = sessionVars.sessionVariable01 + ' Modified variable in second flow. ';]]></expression-component>
+        <response>
+            <dw:transform-message doc:name="Transform Message">
+                <dw:set-payload><![CDATA[%dw 1.0
+%output application/json 
+---
+{
+	variables: {
+		flowVariable: flowVars.flowVariable01,	
+		sessionVariable: sessionVars.sessionVariable01	
+	}
+}]]></dw:set-payload>
+            </dw:transform-message>
+        </response>
+    </flow>
+</mule>
