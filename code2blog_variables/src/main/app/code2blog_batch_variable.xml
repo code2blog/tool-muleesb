@@ -24,7 +24,10 @@ payload]]></dw:set-payload>
             </dw:transform-message>        </batch:input>
         <batch:process-records>
             <batch:step name="Batch_Step">
-                <logger message="dummy-batch-step" level="INFO" doc:name="Logger-dummy-batch-step"/>
+                <logger message="{loggerUid=Logger-batch, file=code2blog_batch_variable.xml, description='logs one record in batch', payload=#[message.payloadAs(java.lang.String)] }" level="INFO" doc:name="Logger-batch" doc:description="log one record in batch message
+
+{loggerUid=Logger-batch, file=code2blog_batch_variable.xml, description='logs one record in batch', payload=#[message.payloadAs(java.lang.String)] }
+"/>
             </batch:step>
         </batch:process-records>
         <batch:on-complete>
