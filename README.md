@@ -24,5 +24,6 @@ code2blog_wsdl
 code2blog_variables
 	var-1 -> demo the features of flow variables
 	var-2 -> demo the features of session variables
-		
+	var-3 -> demo the features of record variables
+	
 </pre>
