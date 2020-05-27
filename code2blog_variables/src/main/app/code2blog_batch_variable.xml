@@ -24,14 +24,18 @@ payload]]></dw:set-payload>
             </dw:transform-message>        </batch:input>
         <batch:process-records>
             <batch:step name="Batch_Step">
-                <logger message="{loggerUid=Logger-batch, file=code2blog_batch_variable.xml, description='logs one record in batch', payload=#[message.payloadAs(java.lang.String)] }" level="INFO" doc:name="Logger-batch" doc:description="log one record in batch message
+                <batch:set-record-variable variableName="batchRecord01" value="#[payload.NAME]" doc:name="Record Variable"/>
+                <logger message="{loggerUid=Logger-batch, file=code2blog_batch_variable.xml, description='logs one record in batch', batchVariables=#[recordVars.batchRecord01], payload=#[message.payloadAs(java.lang.String)] }" level="INFO" doc:name="Logger-batch" doc:description="log one record in batch message
 
-{loggerUid=Logger-batch, file=code2blog_batch_variable.xml, description='logs one record in batch', payload=#[message.payloadAs(java.lang.String)] }
+{loggerUid=Logger-batch, file=code2blog_batch_variable.xml, description='logs one record in batch', batchVariables=#[recordVars.batchRecord01], payload=#[message.payloadAs(java.lang.String)] }
 "/>
             </batch:step>
         </batch:process-records>
         <batch:on-complete>
-            <logger message="dummy-on-complete" level="INFO" doc:name="Logger-dummy-on-complete"/>
+            <logger message="{loggerUid=Logger-on-complete, file=code2blog_batch_variable.xml, description='logs batch complete event', payload=#[payload] }" level="INFO" doc:name="Logger-on-complete" doc:description="logs batch complete event
+
+{loggerUid=Logger-on-complete, file=code2blog_batch_variable.xml, description='logs batch complete event', payload=#[payload] }
+"/>
         </batch:on-complete>
     </batch:job>
 </mule>
