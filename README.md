@@ -25,5 +25,9 @@ code2blog_variables
 	var-1 -> demo the features of flow variables
 	var-2 -> demo the features of session variables
 	var-3 -> demo the features of record variables
+
+code2blog_https
+	ssl-1 -> expose a webservice using https protocol
+	
 	
 </pre>
