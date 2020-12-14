@@ -29,5 +29,7 @@ code2blog_variables
 code2blog_https
 	ssl-1 -> expose a webservice using https protocol
 	
+code2blog_first_successful_connector
+	fsc-1 -> send request to multiple destinations and expect response from the first
 	
 </pre>
