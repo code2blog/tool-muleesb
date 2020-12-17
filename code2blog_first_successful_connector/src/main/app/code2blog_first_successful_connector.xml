@@ -15,7 +15,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 "/>
 
         <first-successful doc:name="First Successful">
-            <set-payload value="#['hardcoded string value']" doc:name="Set Payload"/>
+            <set-payload value="#[throw new RuntimeException('user generated errror, so that the next path gets traversed')]" doc:name="Set Payload"/>
             <dw:transform-message doc:name="Transform Message">
                 <dw:set-payload><![CDATA[%dw 1.0
 %output application/json
