@@ -25,8 +25,10 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 	payload: payload
 }]]></dw:set-payload>
             </dw:transform-message>
-        </first-successful>        <logger message="{loggerUid=Logger-OUT, file=code2blog_first_successful_connector.xml, description='response sent out from flow', inboundProperties=#[message.inboundProperties], outboundProperties=#[message.outboundProperties], payload=#[payload] } " level="INFO" doc:name="Logger-OUT" doc:description="Logs output message sent to consumer 
+        </first-successful>
+        <set-property propertyName="http.status" value="200" doc:name="Property"/>
+        <logger message="{loggerUid=Logger-OUT, file=code2blog_first_successful_connector.xml, description='response sent out from flow',  inboundProperties=#[message.inboundProperties], outboundProperties=#[message.outboundProperties], payload=#[payload], payloadAs=#[message.payloadAs(java.lang.String)] } " level="INFO" doc:name="Logger-OUT" doc:description="Logs output message sent to consumer 
 
-{loggerUid=Logger-OUT, file=global_elements.xml, description='response sent out from flow',  inboundProperties=#[message.inboundProperties], outboundProperties=#[message.outboundProperties], payload=#[payload] } "/>
+{loggerUid=Logger-OUT, file=code2blog_first_successful_connector.xml, description='response sent out from flow',  inboundProperties=#[message.inboundProperties], outboundProperties=#[message.outboundProperties], payload=#[payload], payloadAs=#[message.payloadAs(java.lang.String)] } "/>
     </flow>
 </mule>

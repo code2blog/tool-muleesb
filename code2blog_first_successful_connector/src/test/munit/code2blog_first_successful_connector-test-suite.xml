@@ -8,8 +8,13 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
         <spring:import resource="classpath:code2blog_first_successful_connector.xml"/>
     </spring:beans>
     <munit:test name="code2blog_first_successful_connector-test-suite-code2blog_first_successful_connectorFlowTest" description="Test">
-        <set-payload value="#['test']" doc:name="Set Payload"/>
         <flow-ref name="code2blog_first_successful_connectorFlow" doc:name="Flow-ref to code2blog_first_successful_connectorFlow"/>
-        <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+
+       <logger message="{loggerUid=Logger-OUT, file=code2blog_first_successful_connnector-test-suite.xml, description='response sent out from flow',  inboundProperties=#[message.inboundProperties], outboundProperties=#[message.outboundProperties], payload=#[payload], , payloadAs=#[message.payloadAs(java.lang.String)] } " level="INFO" doc:name="Logger-OUT" doc:description="Logs output message sent to consumer 
+
+{loggerUid=Logger-OUT, file=code2blog_first_successful_connnector-test-suite.xml, description='response sent out from flow',  inboundProperties=#[message.inboundProperties], outboundProperties=#[message.outboundProperties], payload=#[payload], , payloadAs=#[message.payloadAs(java.lang.String)] } "/>
+
+ <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+        <munit:assert-on-equals expectedValue="#['200']" actualValue="#[message.outboundProperties['http.status']]" doc:name="Assert Equals http.status==200"/>
     </munit:test>
 </mule>
