@@ -31,5 +31,6 @@ code2blog_https
 	
 code2blog_first_successful_connector
 	fsc-1 -> send request to multiple destinations and expect response from the first
+	fsc-2 -> execute munit test
 	
 </pre>
