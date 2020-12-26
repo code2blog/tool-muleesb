@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+    <munit:config name="munit" doc:name="MUnit configuration"/>
+    <spring:beans>
+        <spring:import resource="classpath:global_elements.xml"/>
+    </spring:beans>
+    <munit:test name="global_elements-test-suite-global_elementsFlowTest" description="Test">
+        <flow-ref name="global_elementsFlow" doc:name="Flow-ref to global_elementsFlow"/>
+        <logger message="{loggerUid=Logger-OUT, file=global_elements-test-suite.xml, description='response sent out from flow',  inboundProperties=#[message.inboundProperties], outboundProperties=#[message.outboundProperties], payload=#[payload], payloadAs=#[message.payloadAs(java.lang.String)] } " level="INFO" doc:name="Logger-OUT" doc:description="Logs output message sent to consumer 
+
+{loggerUid=Logger-OUT, file=global_elements-test-suite.xml, description='response sent out from flow',  inboundProperties=#[message.inboundProperties], outboundProperties=#[message.outboundProperties], payload=#[payload], payloadAs=#[message.payloadAs(java.lang.String)] } "/>
+        <munit:assert-not-null doc:name="Assert Not Null Payload"/>
+    </munit:test>
+</mule>
