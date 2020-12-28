@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ws http://www.mulesoft.org/schema/mule/ws/current/mule-ws.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd">
+    <flow name="code2blog_connectors_webservice_consumerFlow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/code2blog_connectors_webservice_consumer" doc:name="HTTP"/>
+		<logger
+			message="{loggerUid=Logger-IN, file=code2blog_connectors_webservice_consumer.xml, description='request received into flow', inboundProperties=#[message.inboundProperties], payload=#[payload], payloadAs=#[message.payloadAs(java.lang.String)] }"
+			level="INFO" doc:name="Logger-IN"
+			doc:description="Logs input message  
+
+{loggerUid=Logger-IN, file=code2blog_connectors_webservice_consumer.xml, description='request received into flow', inboundProperties=#[message.inboundProperties], payload=#[payload], payloadAs=#[message.payloadAs(java.lang.String)] }
+" />
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/xml
+%namespace ns0 http://tempuri.org/
+---
+{
+	ns0#Add:{
+		ns0#intA: inboundProperties."http.query.params".intA as :number,
+		ns0#intB: inboundProperties."http.query.params".intB as :number
+	}
+}]]></dw:set-payload>
+        </dw:transform-message>
+        <ws:consumer config-ref="Web_Service_Consumer" operation="Add" doc:name="Web Service Consumer"/>
+    </flow>
+</mule>
