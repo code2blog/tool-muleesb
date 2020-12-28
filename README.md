@@ -36,4 +36,7 @@ code2blog_first_successful_connector
 code2blog_munit
 	cm-1 -> munit samples
 	
+code2blog_connectors
+	cc-1 -> demo use of various connectors starting with wmq
+	
 </pre>

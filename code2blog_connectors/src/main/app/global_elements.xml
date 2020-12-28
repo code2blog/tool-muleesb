@@ -1,27 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:tls="http://www.mulesoft.org/schema/mule/tls"
-	xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf"
+<mule xmlns:wmq="http://www.mulesoft.org/schema/mule/ee/wmq" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf"
 	xmlns:mongo="http://www.mulesoft.org/schema/mule/mongo"
 	xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
 	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
 	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd
-http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
 http://www.mulesoft.org/schema/mule/mongo http://www.mulesoft.org/schema/mule/mongo/current/mule-mongo.xsd
 http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
 http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
-	<http:listener-config name="HTTPs_Listener_Configuration"
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/wmq http://www.mulesoft.org/schema/mule/ee/wmq/current/mule-wmq-ee.xsd">
+	<http:listener-config name="HTTP_Listener_Configuration"
 		host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"
-			doc:description="declared in global_elements_flow" protocol="HTTPS">
-        <tls:context>
-            <tls:key-store path="local_muleesb.jks" keyPassword="changeit" password="changeit"/>
-        </tls:context>
-		</http:listener-config>
+		doc:description="declared in global_elements_flow
+" />
 
     <http:request-config name="HTTP_Request_Configuration" host="localhost" port="8081" doc:name="HTTP Request Configuration"/>
 
@@ -32,14 +28,15 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 	</configuration>
 
    <cxf:configuration name="CXF_Configuration" enableMuleSoapHeaders="true" initializeStaticBusInstance="true" doc:name="CXF Configuration"/>
+    <wmq:connector name="WMQ" hostName="localhost" port="2414" queueManager="IIB_QMGR" channel="SYSTEM.DEF.SVRCONN" transportType="CLIENT_MQ_TCPIP" targetClient="JMS_COMPLIANT" validateConnections="true" doc:name="WMQ"/>
 
 	<flow name="global_elementsFlow">
-		<http:listener config-ref="HTTPs_Listener_Configuration"
-			path="/global_elements" doc:name="HTTPs" />
+		<http:listener config-ref="HTTP_Listener_Configuration"
+			path="/global_elements" doc:name="HTTP" />
         <response>
             <logger message="{loggerUid=Logger-OUT, file=global_elements.xml, description='response sent out from flow', inboundProperties=#[message.inboundProperties], outboundProperties=#[message.outboundProperties], payload=#[payload], payloadAs=#[message.payloadAs(java.lang.String)] } " level="INFO" doc:name="Logger-OUT" doc:description="Logs output message sent to consumer 
 
-{loggerUid=Logger-OUT, file=global_elements.xml, description='response sent out from flow',  inboundProperties=#[message.inboundProperties], outboundProperties=#[message.outboundProperties], payload=#[payload], payloadAs=#[message.payloadAs(java.lang.String)] } "/>
+{loggerUid=Logger-OUT, file=global_elements.xml, description='response sent out from flow',  inboundProperties=#[message.inboundProperties], outboundProperties=#[message.outboundProperties], payload=#[payload, payloadAs=#[message.payloadAs(java.lang.String)]] } "/>
             <dw:transform-message doc:name="Transform Message">
                 <dw:set-payload><![CDATA[%dw 1.0
 %output application/json
@@ -51,12 +48,13 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
             </dw:transform-message>
         </response>
 
+
 		<logger
 			message="{loggerUid=Logger-IN, file=global_elements.xml, description='request received into flow', inboundProperties=#[message.inboundProperties], payload=#[payload], payloadAs=#[message.payloadAs(java.lang.String)] }"
 			level="INFO" doc:name="Logger-IN"
 			doc:description="Logs input message  
 
-{loggerUid=Logger-IN, file=global_elements.xml, description='request received into flow', inboundProperties=#[message.inboundProperties], payload=#[payload], payloadAs=#[message.payloadAs(java.lang.String)] }
+{loggerUid=Logger-IN, file=global_elements.xml, description='request received into flow', inboundProperties=#[message.inboundProperties], payload=#[payload] }
 " />
 
 	</flow>
