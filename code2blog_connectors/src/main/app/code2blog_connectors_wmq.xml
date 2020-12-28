@@ -8,10 +8,11 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
 http://www.mulesoft.org/schema/mule/ee/wmq http://www.mulesoft.org/schema/mule/ee/wmq/current/mule-wmq-ee.xsd
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
                     <flow name="code2blog_connectors_wmqFlow" >
-        <wmq:inbound-endpoint queue="DATASET.IN" doc:name="WMQ" connector-ref="WMQ" />
+        <wmq:inbound-endpoint queue="DATASET.IN" doc:name="WMQ - DATASET.IN" connector-ref="WMQ" />
      <logger message="{loggerUid=Logger-OUT, file=code2blog_connectors_wmq.xml, description='response sent out from flow', inboundProperties=#[message.inboundProperties], outboundProperties=#[message.outboundProperties], payload=#[payload], payloadAs=#[message.payloadAs(java.lang.String)] } " level="INFO" doc:name="Logger-OUT" doc:description="Logs output message sent to consumer 
 
 {loggerUid=Logger-OUT, file=code2blog_connectors_wmq.xml, description='response sent out from flow',  inboundProperties=#[message.inboundProperties], outboundProperties=#[message.outboundProperties], payload=#[payload, payloadAs=#[message.payloadAs(java.lang.String)]] } "/>
+        <wmq:outbound-endpoint queue="TEST.OUT" connector-ref="WMQ" doc:name="WMQ - TEST.OUT"/>
     </flow>
     
 </mule>

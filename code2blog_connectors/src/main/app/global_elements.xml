@@ -28,7 +28,7 @@ http://www.mulesoft.org/schema/mule/ee/wmq http://www.mulesoft.org/schema/mule/e
 	</configuration>
 
    <cxf:configuration name="CXF_Configuration" enableMuleSoapHeaders="true" initializeStaticBusInstance="true" doc:name="CXF Configuration"/>
-    <wmq:connector name="WMQ" hostName="localhost" port="2414" queueManager="IIB_QMGR" channel="SYSTEM.DEF.SVRCONN" transportType="CLIENT_MQ_TCPIP" targetClient="JMS_COMPLIANT" validateConnections="true" doc:name="WMQ"/>
+    <wmq:connector name="WMQ" hostName="localhost" port="2414" queueManager="IIB_QMGR" channel="SYSTEM.DEF.SVRCONN" transportType="CLIENT_MQ_TCPIP" validateConnections="true" doc:name="WMQ"/>
 
 	<flow name="global_elementsFlow">
 		<http:listener config-ref="HTTP_Listener_Configuration"
