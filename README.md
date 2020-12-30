@@ -41,5 +41,6 @@ code2blog_connectors
 	cc-2 -> demo the use of webservice consumer component
 	cc-3 -> demo the use of idempotent message filter 
 	cc-4 -> demo the use of choice router
+	cc-5 -> demo the use of validation component
 	
 </pre>
