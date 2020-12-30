@@ -10,6 +10,11 @@ http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mu
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
     <flow name="code2blog_connectors_validationFlow">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/code2blog_connectors_validation" doc:name="HTTP" allowedMethods="POST"/>
-        <validation:is-email doc:name="Validation" config-ref="Validation_Configuration" email="#[json:email]" message="Please provide valid email in input json"/>
+        <validation:all doc:name="Validation" config-ref="Validation_Configuration"  >
+            <validation:validations>
+                <validation:is-email email="#[json:email]" message="invalid email address"/>
+                <validation:matches-regex value="#[json:phone]" regex="\d{10}" message="invalid phone number"/>
+            </validation:validations>
+        </validation:all>
     </flow>
 </mule>
