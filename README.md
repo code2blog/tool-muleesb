@@ -39,5 +39,6 @@ code2blog_munit
 code2blog_connectors
 	cc-1 -> demo use of various connectors starting with wmq
 	cc-2 -> demo the use of webservice consumer component
+	cc-3 -> demo the use of idempotent message filter 
 	
 </pre>
