@@ -1,0 +1,92 @@
+FILE
+
+INFO  2020-12-31 09:27:12,667 [[code2blog_connectors].code2blog_connectors_fileFlow.stage1.02] org.mule.api.processor.LoggerMessageProcessor: {loggerUid=Logger-IN, file=code2blog_connectors_file.xml, description='request received into flow', inboundProperties={originalDirectory=C:\vishnu\workspace\data\mule-connectors-file\in, fileSize=21, directory=C:\vishnu\workspace\data\mule-connectors-file\in, originalFilename=myFile.csv, MULE_ORIGINATING_ENDPOINT=endpoint..C.vishnu.workspace.data.mule.connectors.file.in, timestamp=1609386966600}, payload=org.mule.transport.file.ReceiverFileInputStream@13ceb45, payloadAs=col1,col2,col3
+a,b,c }
+
+inboundProperties = {
+	originalDirectory = C:  \ vishnu \ workspace \ data \ mule - connectors - file \ in,
+	fileSize = 21,
+	directory = C:  \ vishnu \ workspace \ data \ mule - connectors - file \ in,
+	originalFilename = myFile.csv,
+	MULE_ORIGINATING_ENDPOINT = endpoint..C.vishnu.workspace.data.mule.connectors.file.in,
+	timestamp = 1609386966600
+}
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+HTTP
+
+INFO  2020-12-31 09:31:39,539 [[code2blog_connectors].HTTP_Listener_Configuration.worker.01] org.mule.api.processor.LoggerMessageProcessor: {loggerUid=Logger-IN, file=global_elements.xml, description='request received into flow', inboundProperties={http.request.uri=/global_elements, http.query.string=, sec-fetch-site=none, http.listener.path=/global_elements, sec-fetch-user=?1, sec-ch-ua-mobile=?0, host=localhost:8081, upgrade-insecure-requests=1, connection=keep-alive, http.version=HTTP/1.1, http.method=GET, http.relative.path=/global_elements, http.request.path=/global_elements, sec-fetch-mode=navigate, accept-language=en-US,en;q=0.9, cookie=jenkins-timestamper-offset=-19800000, http.query.params=ParameterMap{[]}, http.remote.address=/127.0.0.1:52672, http.uri.params=ParameterMap{[]}, accept=text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, sec-ch-ua="Google Chrome";v="87", " Not;A Brand";v="99", "Chromium";v="87", accept-encoding=gzip, deflate, br, http.scheme=http, user-agent=Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36, sec-fetch-dest=document}, payload=null, payloadAs={NullPayload} }
+
+{
+  "headers": {
+    "sec-ch-ua-mobile": "?0",
+    "http.remote.address": "/127.0.0.1:52672",
+    "http.uri.params": {
+      
+    },
+    "http.request.uri": "/global_elements",
+    "host": "localhost:8081",
+    "accept-language": "en-US,en;q=0.9",
+    "user-agent": "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
+    "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+    "http.query.string": "",
+    "http.version": "HTTP/1.1",
+    "accept-encoding": "gzip, deflate, br",
+    "sec-fetch-user": "?1",
+    "connection": "keep-alive",
+    "cookie": "jenkins-timestamper-offset=-19800000",
+    "sec-fetch-mode": "navigate",
+    "http.relative.path": "/global_elements",
+    "http.listener.path": "/global_elements",
+    "sec-fetch-dest": "document",
+    "http.method": "GET",
+    "http.query.params": {
+      
+    },
+    "upgrade-insecure-requests": "1",
+    "sec-fetch-site": "none",
+    "http.request.path": "/global_elements",
+    "sec-ch-ua": "\"Google Chrome\";v=\"87\", \" Not;A Brand\";v=\"99\", \"Chromium\";v=\"87\"",
+    "http.scheme": "http"
+  },
+  "payload": null
+}
+
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+WMQ
+
+INFO  2020-12-31 09:34:29,977 [[code2blog_connectors].code2blog_connectors_wmqFlow.stage1.02] org.mule.api.processor.LoggerMessageProcessor: {loggerUid=Logger-OUT, file=code2blog_connectors_wmq.xml, description='response sent out from flow', inboundProperties={JMS_IBM_Character_Set=IBM437, JMSMessageID=ID:414d51204949425f514d4752202020208720ec5f20003702, JMS_IBM_MsgType=8, JMSExpiration=0, JMSRedelivered=false, JMSXUserID=MUSR_MQADMIN, JMSTimestamp=404297200, JMS_IBM_Encoding=546, JMSDeliveryMode=1, JMS_IBM_PutApplType=11, JMSXAppID=ortable\rfhutil\rfhutilc.exe, JMS_IBM_Format=        , JMSPriority=0, JMS_IBM_PutDate=20201231, JMSXDeliveryCount=1, JMS_IBM_PutTime=04042972, MULE_MESSAGE_ID=ID:414d51204949425f514d4752202020208720ec5f20003702, MULE_ORIGINATING_ENDPOINT=endpoint.wmq.DATASET.IN}, outboundProperties={}, payload=[B@1000d2d, payloadAs=abc } 
+
+	inboundProperties = {
+		JMS_IBM_Character_Set = IBM437,
+		JMSMessageID = ID: 414d51204949425f514d4752202020208720ec5f20003702,
+		JMS_IBM_MsgType = 8,
+		JMSExpiration = 0,
+		JMSRedelivered = false,
+		JMSXUserID = MUSR_MQADMIN,
+		JMSTimestamp = 404297200,
+		JMS_IBM_Encoding = 546,
+		JMSDeliveryMode = 1,
+		JMS_IBM_PutApplType = 11,
+		JMSXAppID = ortable \ rfhutil \ rfhutilc.exe,
+		JMS_IBM_Format = ,
+		JMSPriority = 0,
+		JMS_IBM_PutDate = 20201231,
+		JMSXDeliveryCount = 1,
+		JMS_IBM_PutTime = 04042972,
+		MULE_MESSAGE_ID = ID: 414d51204949425f514d4752202020208720ec5f20003702,
+		MULE_ORIGINATING_ENDPOINT = endpoint.wmq.DATASET.IN
+	},
+
+ 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
