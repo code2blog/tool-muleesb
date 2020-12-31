@@ -6,6 +6,7 @@
   <classpathentry kind="src" path="src/test/resources" output="target/test-classes" excluding="**/*.java"/>
   <classpathentry kind="output" path="target/classes"/>
   <classpathentry kind="var" path="M2_REPO/vp/com.ibm.mq/7/com.ibm.mq-7.jar"/>
+  <classpathentry kind="var" path="M2_REPO/vp/oracle/14/oracle-14.jar"/>
   <classpathentry kind="con" path="MULE_RUNTIME"/>
   <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 </classpath>

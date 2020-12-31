@@ -43,5 +43,6 @@ code2blog_connectors
 	cc-4 -> demo the use of choice router
 	cc-5 -> demo the use of validation component
 	cc-6 -> demo the use of file component
+	cc-7 -> demo the use of database component
 	
 </pre>

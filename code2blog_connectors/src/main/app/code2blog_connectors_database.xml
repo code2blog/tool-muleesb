@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
+	xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
+    <flow name="code2blog_connectors_databaseFlow">
+        <http:listener config-ref="HTTP_Listener_Configuration" path="/code2blog_connectors_database" doc:name="HTTP"/>
+ 
+ 		<logger
+			message="{loggerUid=Logger-IN, file=code2blog_connectors_database.xml, description='request received into flow', inboundProperties=#[message.inboundProperties], payload=#[payload], payloadAs=#[message.payloadAs(java.lang.String)] }"
+			level="INFO" doc:name="Logger-IN"
+			doc:description="Logs input message  
+
+{loggerUid=Logger-IN, file=code2blog_connectors_database.xml, description='request received into flow', inboundProperties=#[message.inboundProperties], payload=#[payload], payloadAs=#[message.payloadAs(java.lang.String)] }
+" />
+
+        <db:select config-ref="Generic_Database_Configuration" doc:name="Database">
+            <db:parameterized-query><![CDATA[select * from employee where empno = #[message.inboundProperties.'http.query.params'.empno]]]></db:parameterized-query>
+        </db:select>
+        <logger message="{loggerUid=Logger-OUT, file=code2blog_connectors_database.xml, description='response sent out from flow', inboundProperties=#[message.inboundProperties], outboundProperties=#[message.outboundProperties], payload=#[payload], payloadAs=#[message.payloadAs(java.lang.String)] } " level="INFO" doc:name="Logger-OUT" doc:description="Logs output message sent to consumer 
+
+{loggerUid=Logger-OUT, file=code2blog_connectors_database.xml, description='response sent out from flow',  inboundProperties=#[message.inboundProperties], outboundProperties=#[message.outboundProperties], payload=#[payload, payloadAs=#[message.payloadAs(java.lang.String)]] } "/>
+        <response>
+            <dw:transform-message doc:name="Transform Message">
+                <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+{
+	headers: inboundProperties,
+	payload: payload
+}]]></dw:set-payload>
+            </dw:transform-message>
+        </response>
+ 
+    </flow>
+</mule>
