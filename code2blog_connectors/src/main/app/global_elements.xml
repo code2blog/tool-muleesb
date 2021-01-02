@@ -38,7 +38,6 @@ http://www.mulesoft.org/schema/mule/sfdc http://www.mulesoft.org/schema/mule/sfd
     <validation:config name="Validation_Configuration" doc:name="Validation Configuration"/>
     <file:connector name="File" autoDelete="true" streaming="true" validateConnections="true" doc:name="File"/>
     <db:generic-config name="Generic_Database_Configuration" url="jdbc:oracle:thin:${oracle.xe.username}/${oracle.xe.password}@localhost:1521:XE" driverClassName="oracle.jdbc.OracleDriver" doc:name="Generic Database Configuration"/>
-    <sfdc:config name="Salesforce__Basic_authentication" username="${salesforce.username}" password="${salesforce.password}" securityToken="${salesforce.security.token}" doc:name="Salesforce: Basic authentication"/>
 
 	<flow name="global_elementsFlow">
 		<http:listener config-ref="HTTP_Listener_Configuration"
