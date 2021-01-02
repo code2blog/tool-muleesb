@@ -44,5 +44,6 @@ code2blog_connectors
 	cc-5 -> demo the use of validation component
 	cc-6 -> demo the use of file component
 	cc-7 -> demo the use of database component
+	cc-8 -> demo the use of regex message filter
 	
 </pre>
