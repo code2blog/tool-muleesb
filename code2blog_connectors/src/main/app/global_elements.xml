@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:validation="http://www.mulesoft.org/schema/mule/validation" xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns:wmq="http://www.mulesoft.org/schema/mule/ee/wmq" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf"
+<mule xmlns:sfdc="http://www.mulesoft.org/schema/mule/sfdc" xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:validation="http://www.mulesoft.org/schema/mule/validation" xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns:wmq="http://www.mulesoft.org/schema/mule/ee/wmq" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf"
 	xmlns:mongo="http://www.mulesoft.org/schema/mule/mongo"
 	xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw"
 	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
@@ -17,7 +17,8 @@ http://www.mulesoft.org/schema/mule/ee/wmq http://www.mulesoft.org/schema/mule/e
 http://www.mulesoft.org/schema/mule/ws http://www.mulesoft.org/schema/mule/ws/current/mule-ws.xsd
 http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mule/validation/current/mule-validation.xsd
 http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
-http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/sfdc http://www.mulesoft.org/schema/mule/sfdc/current/mule-sfdc.xsd">
 	<http:listener-config name="HTTP_Listener_Configuration"
 		host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"
 		doc:description="declared in global_elements_flow
@@ -37,6 +38,7 @@ http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/cu
     <validation:config name="Validation_Configuration" doc:name="Validation Configuration"/>
     <file:connector name="File" autoDelete="true" streaming="true" validateConnections="true" doc:name="File"/>
     <db:generic-config name="Generic_Database_Configuration" url="jdbc:oracle:thin:${oracle.xe.username}/${oracle.xe.password}@localhost:1521:XE" driverClassName="oracle.jdbc.OracleDriver" doc:name="Generic Database Configuration"/>
+    <sfdc:config name="Salesforce__Basic_authentication" username="${salesforce.username}" password="${salesforce.password}" securityToken="${salesforce.security.token}" doc:name="Salesforce: Basic authentication"/>
 
 	<flow name="global_elementsFlow">
 		<http:listener config-ref="HTTP_Listener_Configuration"
