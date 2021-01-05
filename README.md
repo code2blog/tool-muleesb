@@ -46,5 +46,8 @@ code2blog_connectors
 	cc-7 -> demo the use of database component
 	cc-8 -> demo the use of regex message filter
 	cc-9 -> demo the use of transform component
+
+code2blog_dataweave
+	cd-1 -> create a json array from list of xml fields
 	
 </pre>
