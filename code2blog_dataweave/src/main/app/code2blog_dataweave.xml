@@ -14,8 +14,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 %output application/json
 ---
 {
-	title: payload.bookstore.*book.title,
-	total: payload.bookstore.*book reduce ((vBook, vSum=0) -> vBook.price + vSum)
+	author: payload.bookstore.*book.*author orderBy $
 		
 }]]></dw:set-payload>
         </dw:transform-message>
