@@ -14,7 +14,7 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 %output application/json
 ---
 {
-	author: payload.bookstore.*book.*author orderBy $
+	author: payload.bookstore.*book.*author map ((vItem, vIndex) -> vIndex ++ ' : ' ++ vItem)
 		
 }]]></dw:set-payload>
         </dw:transform-message>
