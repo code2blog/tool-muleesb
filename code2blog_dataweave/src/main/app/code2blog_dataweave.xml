@@ -14,9 +14,21 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 %output application/json
 ---
 {
-	author: payload.bookstore.*book.*author map ((vItem, vIndex) -> vIndex ++ ' : ' ++ vItem)
-		
-}]]></dw:set-payload>
+	names : payload.bookstore.*book.*author reduce ( (vItem, vAccumulator=[]) -> 
+		vAccumulator ++ vItem splitBy (' ')
+	) orderBy $ distinctBy $ filter ((vItem, vIndex) -> (sizeOf vItem) > 3 ),
+	
+	array_to_map: ['a-b','c-d'] map ( (vItem, vIndex) -> {
+		name: vItem splitBy ('-')
+	}) ,
+	
+	array_to_array :  ['a-b','c-d'] reduce ( (vItem, vAccumulator=[]) -> 
+		vAccumulator ++ vItem splitBy ('-')
+	),
+	
+	all_authors : payload.bookstore.*book.*author
+}
+]]></dw:set-payload>
         </dw:transform-message>
     </flow>
 </mule>
