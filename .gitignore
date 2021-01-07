@@ -24,3 +24,4 @@ hs_err_pid*
 target
 /secure-properties-tool.jar
 /code2blog_connectors/src/main/app/mule-app.properties
+.gitignore

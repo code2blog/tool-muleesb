@@ -50,5 +50,8 @@ code2blog_connectors
 code2blog_dataweave
 	cd-1 -> create a json array from list of xml fields
 	cd-2 -> demo dataweave features
+
+code2blog_mule4_dataweave
+	c4d-1 -> demo dataweave features
 	
 </pre>
