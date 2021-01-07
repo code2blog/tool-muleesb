@@ -10,25 +10,15 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
     <flow name="code2blog_dataweaveFlow">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/code2blog_dataweave" doc:name="HTTP"/>
         <dw:transform-message metadata:id="3c975c3a-8abf-4bc3-a696-8504cc9cd5a3" doc:name="Transform Message">
-            <dw:set-payload><![CDATA[%dw 1.0
-%output application/json
+            <dw:set-payload><![CDATA[%dw 2.0
+%output application/json skipNullOn = "everywhere"
 ---
 {
-	names : payload.bookstore.*book.*author reduce ( (vItem, vAccumulator=[]) -> 
-		vAccumulator ++ vItem splitBy (' ')
-	) orderBy $ distinctBy $ filter ((vItem, vIndex) -> (sizeOf vItem) > 3 ),
-	
-	array_to_map: ['a-b','c-d'] map ( (vItem, vIndex) -> {
-		name: vItem splitBy ('-')
-	}) ,
-	
-	array_to_array :  ['a-b','c-d'] reduce ( (vItem, vAccumulator=[]) -> 
-		vAccumulator ++ vItem splitBy ('-')
-	),
-	
-	all_authors : payload.bookstore.*book.*author
-}
-]]></dw:set-payload>
+	book: payload.bookstore.*book map ( (vItem, vIndex) -> {
+		price: vItem.price replace "\$" with ''
+	}) 
+
+} ]]></dw:set-payload>
         </dw:transform-message>
     </flow>
 </mule>
