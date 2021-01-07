@@ -11,11 +11,11 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
         <http:listener config-ref="HTTP_Listener_Configuration" path="/code2blog_dataweave" doc:name="HTTP"/>
         <dw:transform-message metadata:id="3c975c3a-8abf-4bc3-a696-8504cc9cd5a3" doc:name="Transform Message">
             <dw:set-payload><![CDATA[%dw 2.0
-%output application/json skipNullOn = "everywhere"
+%output application/json skipNullOn="everywhere"
 ---
 {
 	book: payload.bookstore.*book map ( (vItem, vIndex) -> (
-		(vItem.price replace "\$" with '') as :number as :string {format: "#.000"}
+		vItem - "price"
 	)) 
 
 } ]]></dw:set-payload>
