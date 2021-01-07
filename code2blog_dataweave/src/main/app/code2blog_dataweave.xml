@@ -14,9 +14,9 @@ http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee
 %output application/json skipNullOn = "everywhere"
 ---
 {
-	book: payload.bookstore.*book map ( (vItem, vIndex) -> {
-		price: (vItem.price replace "\$" with '') as :number as :string {format: "#.000"}
-	}) 
+	book: payload.bookstore.*book map ( (vItem, vIndex) -> (
+		(vItem.price replace "\$" with '') as :number as :string {format: "#.000"}
+	)) 
 
 } ]]></dw:set-payload>
         </dw:transform-message>
