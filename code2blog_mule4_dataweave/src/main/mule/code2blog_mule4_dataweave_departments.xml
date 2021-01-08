@@ -17,7 +17,9 @@ flatten ( payload.DEPARTMENTS.*DEPARTMENT map (vDepartment, vDepartmentIndex) ->
 			( 
 				vDepartment.*EMPLOYEES.*EMPLOYEE map (vEmployee, vEmployeeIndex) -> 
 				{
-					employee: vEmployee	++ {department : vDepartment.NAME}
+					employee: {
+						(vEmployee mapObject (value, key, index) -> (lower(key)):value)
+					} ++ department : vDepartment.NAME
 				}	
 			)
 			
