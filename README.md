@@ -49,9 +49,10 @@ code2blog_connectors
 
 code2blog_dataweave
 	cd-1 -> create a json array from list of xml fields
-	cd-2 -> demo dataweave features
+	cd-2 -> demo dataweave features -  ( ),{ }, as :number,as :string {format:"#.00"}, replace,with, filter,map,reduce,orderBy,distictBy,sizeOf,splitBy
 
 code2blog_mule4_dataweave
-	c4d-1 -> demo dataweave features
+	c4d-1 -> use boooks.xml to demo dataweave features - isEmpty, if, else, skipNullOn
+	c4d-2 -> use departments.xml to demo dataweave features - flatten
 	
 </pre>
