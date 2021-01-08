@@ -12,9 +12,17 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/json
 ---
-{
-	employees: payload.DEPARTMENTS.*DEPARTMENT.*EMPLOYEES.*EMPLOYEE
-}]]></ee:set-payload>
+
+flatten ( payload.DEPARTMENTS.*DEPARTMENT map (vDepartment, vDepartmentIndex) -> 
+			( 
+				vDepartment.*EMPLOYEES.*EMPLOYEE map (vEmployee, vEmployeeIndex) -> 
+				{
+					employee: vEmployee	++ {department : vDepartment.NAME}
+				}	
+			)
+			
+	)
+]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
 	</flow>
