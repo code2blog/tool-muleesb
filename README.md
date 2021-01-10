@@ -53,6 +53,9 @@ code2blog_dataweave
 
 code2blog_mule4_dataweave
 	c4d-1 -> use boooks.xml to demo dataweave features - isEmpty, if, else, skipNullOn
-	c4d-2 -> use departments.xml to demo dataweave features - flatten
+	c4d-2 -> use departments.xml to demo dataweave features - flatten, mapObject
+
+code2blog_mule4_connectors
+	c4c-1 -> download secure config properties module from exchange and demo encryption with database connector
 	
 </pre>

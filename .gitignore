@@ -25,3 +25,5 @@ target
 /secure-properties-tool.jar
 /code2blog_connectors/src/main/app/mule-app.properties
 .gitignore
+/code2blog_mule4_connectors/src/main/resources/mule-app-secure.properties
+/secure-properties-tool.txt
