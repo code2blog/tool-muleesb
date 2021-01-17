@@ -22,6 +22,12 @@ if (!isEmpty(payload.bookstore.book))
 	// This is from dataweave playground , tutorial
 	similar: (payload.bookstore.book pluck $$)[2] ~= "year",
 	cast_to_string: (payload.bookstore.book pluck $$ as String)[2] == "year",
+	
+	// 2 issues found
+	valuesOf: valuesOf(payload.bookstore.book),
+	keysOf: keysOf(payload.bookstore.book),
+	typeOf: typeOf(payload.bookstore.book),
+	
 	pluck: {
 		// type of pluck key is Key
 		typeOf_key: typeOf((payload.bookstore.book pluck $$)[1]),
@@ -47,6 +53,9 @@ if (!isEmpty(payload.bookstore.book))
 // pluck({ (K)?: V }, (value: V, key: K, index: Number) -> R): Array<R>	
 // mapObject({ (K)?: V }, (value: V, key: K, index: Number) -> Object): Object
 // map(Array<T>, (item: T, index: Number) -> R): Array<R>	
+// keysOf(Object): Array<Key>
+// valuesOf({ (K)?: V }): Array<V>
+
 }
 else
 {
