@@ -54,7 +54,7 @@ code2blog_dataweave
 code2blog_mule4_dataweave
 	c4d-1 -> use boooks.xml to demo dataweave features - isEmpty, if, else, skipNullOn
 	c4d-2 -> use departments.xml to demo dataweave features - flatten, mapObject
-	c4d-3 -> rename code2blog_mule4_dataweave.xml to code2blog_mule4_dataweave_books.xml
+	c4d-3 -> demo the difference between pluck and mapObject
 	
 code2blog_mule4_connectors
 	c4c-1 -> download secure config properties module from exchange and demo encryption with database connector

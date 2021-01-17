@@ -14,7 +14,16 @@ output application/json skipNullOn="everywhere"
 ---
 if (!isEmpty(payload.bookstore.book))
 {
-	books: payload.bookstore.*book
+	pluck: {
+		values: payload.bookstore.book pluck ($),
+		keys: payload.bookstore.book pluck ($$),
+		indices: payload.bookstore.book pluck ($$$)
+	},
+	mapObject: {
+		values: payload.bookstore.book mapObject (value, key, index) -> {(index):value}
+	}
+	
+	
 }
 else
 {
