@@ -14,16 +14,39 @@ output application/json skipNullOn="everywhere"
 ---
 if (!isEmpty(payload.bookstore.book))
 {
+	// All Object keys in DataWeave are of type Key, regardless of how the Object keys are created.
+	// The == operator tests if two values are equal, and part of that means checking that two values are the same type. 
+	// This is why key == "age" returned false for every key-value pair in the input Object, Key == String is always false. 
+	// How do you deal with this? There are three ways, you can: cast the Key to a String with key as String == "age", 
+	// cast the String to a Key with key == "age" as Key, or, use the "similar to" operator, ~= instead of the "equal to" operator key ~= "age".
+	// This is from dataweave playground , tutorial
+	similar: (payload.bookstore.book pluck $$)[2] ~= "year",
+	cast_to_string: (payload.bookstore.book pluck $$ as String)[2] == "year",
 	pluck: {
+		// type of pluck key is Key
+		typeOf_key: typeOf((payload.bookstore.book pluck $$)[1]),
+		// pluck gives you value, key, index. This is similar to mapObject with additional feature of converting map to array.
 		values: payload.bookstore.book pluck ($),
 		keys: payload.bookstore.book pluck ($$),
 		indices: payload.bookstore.book pluck ($$$)
 	},
+	pluck_contains: {
+		// if you want to apply contains function, then cast to an Array 
+		values: (payload.bookstore.book pluck $) as Array contains "2005",
+		// to search within Keys of pluck response, cast it to String
+		keys: (payload.bookstore.book pluck $$ as String) as Array contains "year",
+		indices: (payload.bookstore.book pluck $$$) as Array contains 1
+	},
 	mapObject: {
+		// mapObject takes input as map and returns map
 		values: payload.bookstore.book mapObject (value, key, index) -> {(index):value}
+	},
+	map: {
+		values: ["a","b"] map (value, index) -> value
 	}
-	
-	
+// pluck({ (K)?: V }, (value: V, key: K, index: Number) -> R): Array<R>	
+// mapObject({ (K)?: V }, (value: V, key: K, index: Number) -> Object): Object
+// map(Array<T>, (item: T, index: Number) -> R): Array<R>	
 }
 else
 {
