@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xml-module="http://www.mulesoft.org/schema/mule/xml-module" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/xml-module http://www.mulesoft.org/schema/mule/xml-module/current/mule-xml-module.xsd">
+	<flow name="code2blog_mule4_connectors_validate_xmlFlow" doc:id="11fc6234-aa1f-4f4f-8e22-9b45d5165591" >
+		<http:listener doc:name="Listener" doc:id="7009a68c-b4dc-4e5c-8c58-c3a1fd89415a" config-ref="HTTP_Listener_config" path="/code2blog_mule4_connectors_validate_xml"/>
+		<xml-module:validate-schema doc:name="Validate xml schema" doc:id="c095d12a-7e8d-4b15-83bc-5f12aeb08706" schemas="note.xsd"/>
+		<set-payload value="#['note received']" doc:name="Set Payload" doc:id="c769fe17-a0ee-4b45-8e3c-bc7cdceb715f" />
+	</flow>
+</mule>
