@@ -24,8 +24,8 @@ if (!isEmpty(payload.bookstore.book))
 	cast_to_string: (payload.bookstore.book pluck $$ as String)[2] == "year",
 	
 	// 2 issues found
-	valuesOf: valuesOf(payload.bookstore.book),
-	keysOf: keysOf(payload.bookstore.book),
+//	valuesOf: valuesOf(payload.bookstore.book),
+//	keysOf: keysOf(payload.bookstore.book),
 	typeOf: typeOf(payload.bookstore.book),
 	
 	pluck: {
