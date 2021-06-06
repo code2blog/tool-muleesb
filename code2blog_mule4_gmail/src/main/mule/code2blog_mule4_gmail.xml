@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:tls="http://www.mulesoft.org/schema/mule/tls" xmlns:email="http://www.mulesoft.org/schema/mule/email"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/email http://www.mulesoft.org/schema/mule/email/current/mule-email.xsd
+http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd">
+	<email:imap-config name="Email_IMAP" doc:name="Email IMAP" doc:id="75970a2b-2509-4a57-b53b-5150f3de195d" >
+		<email:imaps-connection host="imap.gmail.com" user="${gmail.username}" password="${gmail.password}" >
+			<tls:context >
+				<tls:trust-store insecure="true" />
+			</tls:context>
+		</email:imaps-connection>
+	</email:imap-config>
+	<configuration-properties doc:name="Configuration properties" doc:id="8a5c2c1a-4880-498c-a163-b12ca751890a" file="gmail-config.yaml" />
+	<flow name="code2blog_mule4_gmailFlow" doc:id="100cd6c0-4931-4a5c-90e8-9b4bb2324e09" >
+		<email:listener-imap doc:name="On New Email - IMAP" doc:id="9c6aa508-2551-4956-bf1e-12e3d2d5d320" config-ref="Email_IMAP">
+			<scheduling-strategy >
+				<fixed-frequency frequency="1" timeUnit="MINUTES" />
+			</scheduling-strategy>
+		</email:listener-imap>
+		<logger level="INFO" doc:name="LOG INFO payload" doc:id="f248876e-bff7-46b2-a13e-09b767699491" message="#[payload]"/>
+	</flow>
+</mule>

@@ -60,5 +60,8 @@ code2blog_mule4_dataweave
 code2blog_mule4_connectors
 	c4c-1 -> download secure config properties module from exchange and demo encryption with database connector
 	c4c-2 -> demo the use of xml validate component and json validate module
+
+code2blog_mule4_gmail
+	c4g-1 demo the use of imaps connection to acquire email
 	
 </pre>
