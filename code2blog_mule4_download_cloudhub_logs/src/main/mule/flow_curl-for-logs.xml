@@ -7,27 +7,24 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
 	<flow name="flow_curl-for-logs" doc:id="06500632-4a27-49d1-b113-7a2105f41cc4" >
 		<http:listener doc:name="GET /curl-for-logs" doc:id="6f83e0a9-f147-4fce-85bd-1c29d691eef6" config-ref="HTTP_Listener_config" path="/curl-for-logs" allowedMethods="GET"/>
-				<set-variable value="#[attributes.queryParams.orgId]" doc:name="orgId" doc:id="e98a4039-c756-480e-bada-be76775d2fd5" variableName="orgId"/>
-		<set-variable value="#[attributes.queryParams.envId]" doc:name="envId" doc:id="caed0f92-bc40-4c3d-af41-9b092a5d1c39" variableName="envId"/>
-		<set-variable value="#[attributes.queryParams.auth]" doc:name="auth" doc:id="a76de079-e852-4066-80bd-6495ea60273e" variableName="auth"/>
-		<set-variable value="#[attributes.queryParams.domain]" doc:name="domain" doc:id="0c4283ad-baf2-4ccf-ab32-3e8dfec4d40e" variableName="domain"/>
-		<http:request method="GET" doc:name="GET anypoint.mulesoft.com /deployments" doc:id="0f83e8cb-06bc-4d78-a0ad-f17d07dd05ad" config-ref="HTTPS_Request_configuration_cloudhub" url="#[p('cloudhub.deployments.url') replace '[domain]' with attributes.queryParams.domain]">
+		<set-variable value="#[attributes.queryParams.orgId]" doc:name="orgId" doc:id="f63ba40c-3cbd-4362-aeec-e46e5697a4b7" variableName="orgId"/>
+		<set-variable value="#[attributes.queryParams.envId]" doc:name="envId" doc:id="bdd411ea-1376-4c10-a66c-b339ec85e55e" variableName="envId"/>
+		<set-variable value="#[attributes.queryParams.auth]" doc:name="auth" doc:id="e608649e-a782-4f49-b858-3ff701cb3659" variableName="auth"/>
+<http:request method="GET" doc:name="GET anypoint.mulesoft.com /applications" doc:id="dc58b466-4fff-43af-9a4f-ba45e43dd776" config-ref="HTTPS_Request_configuration_cloudhub" url="${cloudhub.applications.url}">
 			<http:headers ><![CDATA[#[output application/java
 ---
 {
-	"X-ANYPNT-ENV-ID" : attributes.queryParams.envId,
-	"Authorization" : "bearer " ++ attributes.queryParams.auth,
-	"X-ANYPNT-ORG-ID" : attributes.queryParams.orgId
+	"X-ANYPNT-ENV-ID" : vars.envId,
+	"Authorization" : "bearer " ++ (vars.auth default ''),
+	"X-ANYPNT-ORG-ID" : vars.orgId
 }]]]></http:headers>
 		</http:request>
-		<logger level="INFO" doc:name="LOG INFO payload" doc:id="0db0a83a-ed5e-4681-ac11-fe876dcf0e7e" message="#[payload]"/>
-		
-		<set-variable value="#[[]]" doc:name="curlOutput" doc:id="6d24cce6-649d-438e-85a3-231e87ae55f3" variableName="curlOutput"/>
-		<ee:transform doc:name="set bash variables" doc:id="0f110e7f-a0cf-4dce-bdb8-c21a9deb476e" >
-			<ee:message >
+			<set-variable value="#[[]]" doc:name="curlOutput" doc:id="87863f7e-b2fb-43bc-8e47-b6c36cb36452" variableName="curlOutput" />
+		<ee:transform doc:name="set bash variables" doc:id="fdb0df22-b1f6-4062-ab10-39ea64853ce3">
+			<ee:message>
 			</ee:message>
-			<ee:variables >
-				<ee:set-variable variableName="curlOutput" ><![CDATA[%dw 2.0
+			<ee:variables>
+				<ee:set-variable variableName="curlOutput"><![CDATA[%dw 2.0
 output application/java
 ---
 (vars.curlOutput default [] ) << ('ORG_ID=[orgId]
@@ -41,8 +38,20 @@ BASE_FOLDER=C:/vishnu/temp
  )]]></ee:set-variable>
 			</ee:variables>
 		</ee:transform>
-		<foreach doc:name="For Each deploymentId" doc:id="bc6ec12e-6a7a-4c25-80cd-4f109d6c84cd" collection="payload.data">
-			<ee:transform doc:name="Build Response logs" doc:id="676777b0-9a5d-409a-a7ca-a0ccdb463f75">
+		<foreach doc:name="For Each" doc:id="03d7c9cb-076e-4288-8788-aed1fea674c4" collection="#[payload]">
+		<set-variable value="#[payload.domain]" doc:name="domain" doc:id="4ac271df-4deb-4e90-a02b-c6ece52bf885" variableName="domain"/>
+		<http:request method="GET" doc:name="GET anypoint.mulesoft.com /deployments" doc:id="5f6ce08b-a625-436e-97d8-d1caf7d07082" config-ref="HTTPS_Request_configuration_cloudhub" url="#[p('cloudhub.deployments.url') replace '[domain]' with vars.domain]">
+			<http:headers ><![CDATA[#[output application/java
+---
+{
+	"X-ANYPNT-ENV-ID" : vars.envId,
+	"Authorization" : "bearer " ++ vars.auth,
+	"X-ANYPNT-ORG-ID" : vars.orgId
+}]]]></http:headers>
+		</http:request>
+		<logger level="INFO" doc:name="LOG INFO payload" doc:id="953a0c3e-d176-4d52-ac9e-e4f0be96b9d1" message="#[payload]"/>
+		<foreach doc:name="For Each deploymentId" doc:id="2d695d45-4c99-49d0-a5c7-ec1e6fd70479" collection="payload.data">
+			<ee:transform doc:name="Build Response logs" doc:id="2cf6bc1d-b286-4855-9beb-f0fe083a785a">
 			<ee:message>
 			</ee:message>
 				<ee:variables >
@@ -58,9 +67,10 @@ var curlCommandReplaced = curlCommand
 				</ee:variables>
 		</ee:transform>
 		</foreach>
+			</foreach>
 		<set-payload value='#[%dw 2.0
 output text/plain
 ---
-(vars.curlOutput default []) joinBy "\r\n"]' doc:name="Set Payload" doc:id="4d11a00d-caee-44d1-bd2a-6dfffa7548b2" />
+(vars.curlOutput default []) joinBy "\r\n"]' doc:name="Set Payload" doc:id="4859f393-7cbf-4027-b05c-ac94f76b32e0" />
 	</flow>
 </mule>
