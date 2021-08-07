@@ -1,5 +1,0 @@
-curl 'https://anypoint.mulesoft.com/cloudhub/api/v2/applications/[domain]/deployments/[deploymentId]/log-file' \
-  -H "X-ANYPNT-ORG-ID: ${ORG_ID}" \
-  -H "X-ANYPNT-ENV-ID: ${ENV_ID}" \
-  -H "Authorization: bearer ${AUTH}" \
-  --compressed --output "${BASE_FOLDER}\[domain]--[createTime].log"

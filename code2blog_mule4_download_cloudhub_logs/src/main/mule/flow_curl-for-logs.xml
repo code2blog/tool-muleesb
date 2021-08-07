@@ -51,22 +51,40 @@ BASE_FOLDER=C:/vishnu/temp
 		</http:request>
 		<logger level="INFO" doc:name="LOG INFO payload" doc:id="953a0c3e-d176-4d52-ac9e-e4f0be96b9d1" message="#[payload]"/>
 		<foreach doc:name="For Each deploymentId" doc:id="2d695d45-4c99-49d0-a5c7-ec1e6fd70479" collection="payload.data">
-			<ee:transform doc:name="Build Response logs" doc:id="2cf6bc1d-b286-4855-9beb-f0fe083a785a">
+			<set-variable value="#[payload.createTime]" doc:name="createTime" doc:id="d2a894d0-441a-4cb9-b602-dc6d0c96c8d4" variableName="createTime" />
+				<ee:transform doc:name="Build Response logs for deploymentId" doc:id="2cf6bc1d-b286-4855-9beb-f0fe083a785a">
 			<ee:message>
 			</ee:message>
 				<ee:variables >
 					<ee:set-variable variableName="curlOutput" ><![CDATA[%dw 2.0
 output application/json
-var curlCommand = readUrl('classpath://script-logs.txt', 'text/plain')
+var curlCommand = readUrl('classpath://script-log-file-deploymentId.txt', 'text/plain')
 var curlCommandReplaced = curlCommand 
 	replace '[domain]' with (vars.domain default '')
  	replace '[deploymentId]' with payload.deploymentId
- 	replace '[createTime]' with (payload.createTime replace ':' with '-')
+ 	replace '[createTime]' with ((vars.createTime default '') replace ':' with '-')
 ---
 (vars.curlOutput default []) << curlCommandReplaced]]></ee:set-variable>
 				</ee:variables>
 		</ee:transform>
-		</foreach>
+				<foreach doc:name="For Each instanceId" doc:id="642c8479-f5be-4959-84f9-e3b7e2aafbd4" collection="#[payload.instances]">
+					<ee:transform doc:name="Build Response logs for instanceId" doc:id="0f69ee01-fcf9-4857-ba32-ac32556da500">
+			<ee:message>
+			</ee:message>
+				<ee:variables>
+					<ee:set-variable variableName="curlOutput"><![CDATA[%dw 2.0
+output application/json
+var curlCommand = readUrl('classpath://script-log-file-instanceId.txt', 'text/plain')
+var curlCommandReplaced = curlCommand 
+	replace '[domain]' with (vars.domain default '')
+ 	replace '[instanceId]' with payload.instanceId
+ 	replace '[createTime]' with ((vars.createTime default '') replace ':' with '-')
+---
+(vars.curlOutput default []) << curlCommandReplaced]]></ee:set-variable>
+				</ee:variables>
+		</ee:transform>
+				</foreach>		
+</foreach>
 			</foreach>
 		<set-payload value='#[%dw 2.0
 output text/plain
