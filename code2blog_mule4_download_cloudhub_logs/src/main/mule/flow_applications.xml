@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="flow_applications" doc:id="06500632-4a27-49d1-b113-7a2105f41cc4" >
+		<http:listener doc:name="GET /applications" doc:id="6f83e0a9-f147-4fce-85bd-1c29d691eef6" config-ref="HTTP_Listener_config" path="/download-logs" allowedMethods="GET"/>
+		<http:request method="GET" doc:name="GET anypoint.mulesoft.com /applications" doc:id="9e379efa-ae1f-4051-abcf-13f5c0b12faa" config-ref="HTTPS_Request_configuration_cloudhub" url="${cloudhub.applications.url}">
+			<http:headers ><![CDATA[#[output application/java
+---
+{
+	"X-ANYPNT-ORG-ID" : attributes
+}]]]></http:headers>
+		</http:request>
+		<ee:transform doc:name="Build Response" doc:id="676777b0-9a5d-409a-a7ca-a0ccdb463f75" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	applications: payload,
+	attributes: attributes.headers
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>

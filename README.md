@@ -63,5 +63,8 @@ code2blog_mule4_connectors
 
 code2blog_mule4_gmail
 	c4g-1 demo the use of imaps connection to acquire email
+
+code2blog_mule4_download_cloudhub_logs
+	cdcl-1 download cloudhub logs from all apps, all instances
 	
 </pre>
