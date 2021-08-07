@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="flow_deployments" doc:id="06500632-4a27-49d1-b113-7a2105f41cc4" >
+		<http:listener doc:name="GET /deployments" doc:id="6f83e0a9-f147-4fce-85bd-1c29d691eef6" config-ref="HTTP_Listener_config" path="/deployments" allowedMethods="GET"/>
+		<http:request method="GET" doc:name="GET anypoint.mulesoft.com /deployments" doc:id="9e379efa-ae1f-4051-abcf-13f5c0b12faa" config-ref="HTTPS_Request_configuration_cloudhub" url="#[p('cloudhub.deployments.url') replace '[domain]' with attributes.queryParams.domain]">
+			<http:headers ><![CDATA[#[output application/java
+---
+{
+	"X-ANYPNT-ENV-ID" : attributes.queryParams.envId,
+	"Authorization" : "bearer " ++ attributes.queryParams.auth,
+	"X-ANYPNT-ORG-ID" : attributes.queryParams.orgId
+}]]]></http:headers>
+		</http:request>
+		<logger level="INFO" doc:name="LOG INFO payload" doc:id="9257b45f-4e0d-444c-8266-f77bb644f000" message="#[payload]"/>
+		<ee:transform doc:name="Build Response" doc:id="676777b0-9a5d-409a-a7ca-a0ccdb463f75" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	deployments: payload..deploymentId
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
