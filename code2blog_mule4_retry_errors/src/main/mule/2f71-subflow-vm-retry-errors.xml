@@ -4,8 +4,7 @@
 	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd">
-	<flow name="flow-vm-retry-errors" doc:id="ec48dbd7-d670-4937-9349-5ee7304d533d" >
-		<vm:listener doc:name="retry errors" doc:id="1892b9f5-0417-471f-8403-e196a78de20a" numberOfConsumers="1" queueName="${error-handling.vm.queuename}" config-ref="VM_Config_retry"/>
+	<sub-flow name="2f71-subflow-vm-retry-errors" doc:id="ec48dbd7-d670-4937-9349-5ee7304d533d" >
 		<logger level="DEBUG" doc:name="LOG DEBUG payload" doc:id="5682026a-01db-4004-a9bb-8f7a12b2b7f2" message="#[payload]" />
 		<set-variable value="#[%dw 2.0
 output application/dw
@@ -15,7 +14,7 @@ output application/dw
 output application/dw
 ---
 (payload.root.correlationId as String) default 'notPopulated']" doc:name="correlationId" doc:id="ed4425a5-b7ae-48a7-8de9-23167e2cc2cd" variableName="correlationId"/>
-		<set-variable value="${error-handling.retry.threshold}" doc:name="retryThreshold" doc:id="4d250f06-5b38-4650-89b4-1d5af68f9619" variableName="retryThreshold"/>
+		<set-variable value="${2f71-error-handling.retry.threshold}" doc:name="retryThreshold" doc:id="4d250f06-5b38-4650-89b4-1d5af68f9619" variableName="retryThreshold"/>
 		<logger level="INFO" doc:name="LOG INFO [retry check]" doc:id="0b4cde3b-f03d-48d6-b5ae-ccb89f86f8d9" message="#[%dw 2.0
 output text/plain
 ---
@@ -27,7 +26,7 @@ import * from dw::util::Values
 output application/dw
 ---
 payload update ["root","retryCount"] with (vars.retryCount + 1)]' doc:name="set retryCount+1 in payload" doc:id="218b1b7f-0179-4b39-bfd9-c7b1b32fdcc4" />
-				<flow-ref doc:name="source flow" doc:id="1ed8c451-2900-4d2d-9cf7-823b3eebabf2" name="${error-handling.source.flow}"/>
+				<flow-ref doc:name="source flow" doc:id="1ed8c451-2900-4d2d-9cf7-823b3eebabf2" name="${2f71-error-handling.source.flow}"/>
 			</when>
 			<otherwise>
 				<logger level="ERROR" doc:name="LOG ERROR retry exhausted" doc:id="8ef58c3e-cc54-4f70-a62f-b9a437b8dcb6" message="#[%dw 2.0
@@ -36,10 +35,5 @@ output text/plain
 'retry exhausted for message with correlationId=' ++ (vars.correlationId as String)]"/>
 			</otherwise>
 		</choice>
-		<error-handler >
-			<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="45825c3b-c143-47ad-ac80-3f3ff0dc4cc1" >
-				<flow-ref doc:name="subflow-error-handler-for-error-type-any" doc:id="4f85c36a-dcd8-4962-90df-063ab213ef34" name="subflow-error-handler-for-error-type-any"/>
-			</on-error-continue>
-		</error-handler>
-	</flow>
+	</sub-flow>
 </mule>

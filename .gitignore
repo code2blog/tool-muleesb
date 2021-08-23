@@ -27,3 +27,5 @@ target
 .gitignore
 /code2blog_mule4_connectors/src/main/resources/mule-app-secure.properties
 /secure-properties-tool.txt
+/code2blog_mule4_uses_retry/vp-copy.bat - Shortcut.lnk
+/code2blog_mule4_retry_errors/vp-copy.bat - Shortcut.lnk

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd">
+	<vm:config name="2f71-VM_Config_retry" doc:name="VM Config" doc:id="cb297e1d-7f88-4b4a-b098-b09ce64c71c9" >
+		<vm:queues >
+			<vm:queue queueName="${2f71-error-handling.vm.queuename.retry01}" queueType="PERSISTENT" />
+			<vm:queue queueName="${2f71-error-handling.vm.queuename.retry02}" queueType="PERSISTENT" />
+			<vm:queue queueName="${2f71-error-handling.vm.queuename.trigger01}" />
+			<vm:queue queueName="${2f71-error-handling.vm.queuename.trigger02}" />
+		</vm:queues>
+	</vm:config>
+	<configuration-properties doc:name="2f71-Configuration properties" doc:id="e47ff9fc-13e0-46fc-bfd0-6247b9736136" file="2f71-config.properties" />
+</mule>

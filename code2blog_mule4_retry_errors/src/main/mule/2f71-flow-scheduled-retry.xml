@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:jms="http://www.mulesoft.org/schema/mule/jms"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd">
+	<flow name="2f71-flow-scheduled-retry" doc:id="74e57ebf-cddf-49ae-8c6f-588a08b20da4" >
+		<scheduler doc:name="Scheduler" doc:id="580f424c-f062-489b-a0bb-7dcb431e76a9" >
+			<scheduling-strategy >
+				<fixed-frequency frequency="${2f71-scheduled-retry.frequency.in.seconds}" timeUnit="SECONDS"/>
+			</scheduling-strategy>
+		</scheduler>
+		<choice doc:name="Choice" doc:id="8875c8a9-b87b-4a9c-8a83-d8af6f229d21" >
+			<when expression="${2f71-error-handling.expression-for-queue}">
+				<vm:publish queueName="${2f71-error-handling.vm.queuename.trigger01}" doc:name="trigger01" doc:id="60a80a4a-0830-46d8-a9dd-92a950f61ac6" config-ref="2f71-VM_Config_retry"/>
+			</when>
+			<otherwise >
+				<vm:publish doc:name="trigger02" doc:id="a758eff5-0f1f-4ecb-b257-7d5003338506" config-ref="2f71-VM_Config_retry" queueName="${2f71-error-handling.vm.queuename.trigger02}"/>
+			</otherwise>
+		</choice>
+		<error-handler >
+			<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="91303875-6029-4a58-8982-f9484cf42c01" >
+				<flow-ref doc:name="2f71-subflow-error-handler-for-error-type-any" doc:id="472fcfc3-7831-4f20-a795-3f13e184e9ec" name="2f71-subflow-error-handler-for-error-type-any"/>
+			</on-error-continue>
+		</error-handler>
+	</flow>
+</mule>

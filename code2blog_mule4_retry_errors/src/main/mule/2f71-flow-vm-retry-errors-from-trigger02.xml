@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd">
+	<flow name="2f71-flow-vm-retry-errors-from-trigger-02" doc:id="ec48dbd7-d670-4937-9349-5ee7304d533d" >
+		<vm:listener doc:name="triggerQueue02" doc:id="1892b9f5-0417-471f-8403-e196a78de20a" numberOfConsumers="1" queueName="${2f71-error-handling.vm.queuename.trigger02}" config-ref="2f71-VM_Config_retry"/>
+		<vm:consume doc:name="retryQueue02" doc:id="de549eba-eb78-47b7-b8b7-c77cd949f063" config-ref="2f71-VM_Config_retry" queueName="${2f71-error-handling.vm.queuename.retry02}"/>
+		<flow-ref doc:name="2f71-subflow-vm-retry-errors" doc:id="b3aec232-6619-4582-bf86-4e5f6237f4e3" name="2f71-subflow-vm-retry-errors"/>
+		<vm:publish doc:name="triggerQueue02" doc:id="5888080a-6d13-43dd-900e-a858300bd7b7" config-ref="2f71-VM_Config_retry" queueName="${2f71-error-handling.vm.queuename.trigger02}" />
+		<error-handler >
+			<on-error-continue enableNotifications="true" logException="false" doc:name="On Error Continue" doc:id="5f19114d-81c3-48ac-a48f-5a622ccbb5f6" type="VM:EMPTY_QUEUE"/>
+			<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="45825c3b-c143-47ad-ac80-3f3ff0dc4cc1" >
+				<flow-ref doc:name="2f71-subflow-error-handler-for-error-type-any" doc:id="4f85c36a-dcd8-4962-90df-063ab213ef34" name="2f71-subflow-error-handler-for-error-type-any"/>
+			</on-error-continue>
+		</error-handler>
+	</flow>
+</mule>
