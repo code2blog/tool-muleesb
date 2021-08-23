@@ -66,5 +66,9 @@ code2blog_mule4_gmail
 
 code2blog_mule4_download_cloudhub_logs
 	cdcl-1 download cloudhub logs from all apps, all instances
+
+code2blog_mule4_retry_errors
+	2f71-01 immediate retry
+	2f71-02 schedulded retry 
 	
 </pre>

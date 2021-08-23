@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	<flow name="flow-that-always-fails" doc:id="fed5a8a8-dfc3-4fd4-be74-d30bfc8c4d98" >
+		<logger level="INFO" doc:name="LOG INFO payload" doc:id="5603325b-f67a-416c-98bd-813df239f043" message="#[payload]"/>
+		<raise-error doc:name="C2B:ALWAYS_FAIL" doc:id="a2fae715-b3f7-4ac0-8a5f-5d802dd2011e" type="C2B:ALWAYS_FAIL"/>
+		<error-handler >
+			<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="b1d8d98f-1ef5-42a0-a5ba-01c0c2f78fe5" >
+				<flow-ref doc:name="subflow-error-handler-to-retry-errors" doc:id="e882fd22-2798-44fb-a673-08b5b48122d8" name="subflow-error-handler-to-retry-errors"/>
+			</on-error-continue>
+		</error-handler>
+	</flow>
+</mule>

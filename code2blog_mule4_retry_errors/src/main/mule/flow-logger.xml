@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	<flow name="flow-logger" doc:id="0878224e-ac4b-4ef9-a7fc-3ddcc6f8f98e" >
+		<logger level="INFO" doc:name="LOG INFO 'source flow invoked'" doc:id="91ebc7ae-74f1-4138-b9ca-d2bc79d5cdd1" message="source flow invoked"/>
+	</flow>
+</mule>
