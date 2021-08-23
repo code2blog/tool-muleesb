@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="8923e0e2-7bad-4a68-bcfd-69ea3b1154b6" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<import doc:name="Import error.xml" doc:id="21b35128-d8d0-40a2-a0ee-067b723d5908" file="error.xml" />
+	<import doc:name="Import flow-that-always-fails.xml" doc:id="73a55fc5-3c7f-424d-8547-6891d66c8a68" file="flow-that-always-fails.xml" />
+	<import doc:name="Import flow-vm-retry-errors.xml" doc:id="7bd68030-102d-4c6b-af29-eeecdf4cad37" file="flow-vm-retry-errors.xml" />
+	<import doc:name="Import global.xml" doc:id="63739ece-5870-4c08-ac0e-aa9a963af4b9" file="global.xml" />
+	<import doc:name="Import subflow-initialize-retry.xml" doc:id="4dcb53ae-b4b2-46ea-a50e-1c61db5e958a" file="subflow-initialize-retry.xml" />
+	<configuration-properties doc:name="Configuration properties" doc:id="c7486728-c9f7-4188-aeb3-dcda35a63241" file="config.properties" />
+</mule>

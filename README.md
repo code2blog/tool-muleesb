@@ -71,4 +71,7 @@ code2blog_mule4_retry_errors
 	2f71-01 immediate retry
 	2f71-02 schedulded retry 
 	
+code2blog_mule4_uses_retry
+	2d7c-01 immediate retry library used as a dependency in this projects
+	
 </pre>
