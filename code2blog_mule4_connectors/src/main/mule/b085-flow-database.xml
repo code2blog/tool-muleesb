@@ -11,7 +11,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 		<logger level="INFO" doc:name="Logger-IN" doc:id="a876585e-5731-4012-8346-c8222c7d5945" doc:description="Logs input message
 
 {loggerUid=Logger-IN, file=code2blog_mule4_connectors_database.xml, description='request received into flow', attributes=#[message.attributes], payload=#[payload] }" message="{loggerUid=Logger-IN, file=code2blog_mule4_connectors_database.xml, description='request received into flow', attributes=#[message.attributes], payload=#[payload] }"/>
-		<db:select doc:name="Select" doc:id="52b153ba-8539-47af-95bf-c42291c2de68" config-ref="Database_Config">
+		<db:select doc:name="Select" doc:id="52b153ba-8539-47af-95bf-c42291c2de68" config-ref="b085-Database_Config">
 			<db:sql ><![CDATA[select * from wmbowner.employee where empno=:empno ]]></db:sql>
 			<db:input-parameters ><![CDATA[#[{'empno': message.attributes.queryParams.empno}]
 ]]></db:input-parameters>

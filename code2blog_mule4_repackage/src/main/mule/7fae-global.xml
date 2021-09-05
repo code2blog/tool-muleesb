@@ -2,4 +2,13 @@
 
 <mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd"></mule>
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+
+	<configuration-properties doc:name="7fae-Configuration properties" doc:id="7f764364-c8dc-424f-af8b-b599100c9a71" file="7fae-config.properties" />
+
+	<import doc:name="b085-flow-validate_json.xml" doc:id="919282e5-0d75-4bad-881f-1f43ca34b699" file="b085-flow-validate_json.xml" />
+	<import doc:name="b085-global.xml" doc:id="d27cc4d0-4ce1-42cb-914f-0fd0d44834b7" file="b085-global.xml" />
+	<import doc:name="9732-flow-departments.xml" doc:id="4f9512a1-f686-4470-8168-7794dce7faad" file="9732-flow-departments.xml" />
+	<import doc:name="9732-global.xml" doc:id="c3209163-652c-45c0-ac74-29a23f8f37d5" file="9732-global.xml" />
+
+</mule>

@@ -6,14 +6,14 @@
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
 http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd">
-	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="5a39f158-a383-4ad3-92a7-c5d0fd753c13" >
-		<http:listener-connection host="0.0.0.0" port="8081" />
+	<http:listener-config name="b085-HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="5a39f158-a383-4ad3-92a7-c5d0fd753c13" >
+		<http:listener-connection host="0.0.0.0" port="${b085-http.listener.port}" />
 	</http:listener-config>
-	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="de516aca-4d16-4d4b-bb23-da31417376fd" file="mule-app-secure.properties" key="code2blogKey" >
+	<secure-properties:config name="b085-Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="de516aca-4d16-4d4b-bb23-da31417376fd" file="mule-app-secure.properties" key="code2blogKey" >
 		<secure-properties:encrypt algorithm="Blowfish" />
 	</secure-properties:config>
-	<db:config name="Database_Config" doc:name="Database Config" doc:id="7ca77236-73d2-41fd-8a97-048e403c7390" >
+	<db:config name="b085-Database_Config" doc:name="Database Config" doc:id="7ca77236-73d2-41fd-8a97-048e403c7390" >
 		<db:generic-connection url="jdbc:oracle:thin:@localhost:1521:XE" driverClassName="oracle.jdbc.OracleDriver" user="${secure::oracle.xe.username}" password="${secure::oracle.xe.password}"/>
 	</db:config>
-	<configuration-properties doc:name="Configuration properties" doc:id="5be53591-0e45-4a78-9275-8e987271f863" file="b085-config.properties" />
+	<configuration-properties doc:name="b085-Configuration properties" doc:id="5be53591-0e45-4a78-9275-8e987271f863" file="b085-config.properties" />
 </mule>
