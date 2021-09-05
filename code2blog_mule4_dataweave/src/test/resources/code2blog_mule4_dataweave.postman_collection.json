@@ -1,0 +1,65 @@
+{
+	"info": {
+		"_postman_id": "7eb51d49-4ccb-4a24-ba44-2510bc7a6e2e",
+		"name": "code2blog_mule4_dataweave",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "books",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<bookstore>\r\n\r\n<book category=\"cooking\">\r\n  <title lang=\"en\">Everyday Italian</title>\r\n  <author>Giada De Laurentiis</author>\r\n  <year>2005</year>\r\n  <price>30.00</price>\r\n</book>\r\n\r\n<book category=\"children\">\r\n  <title lang=\"en\">Harry Potter</title>\r\n  <author>J K. Rowling</author>\r\n  <year>2005</year>\r\n  <price>29.99</price>\r\n</book>\r\n\r\n<book category=\"web\">\r\n  <title lang=\"en\">XQuery Kick Start</title>\r\n  <author>James McGovern</author>\r\n  <author>Per Bothner</author>\r\n  <author>Kurt Cagle</author>\r\n  <author>James Linn</author>\r\n  <author>Vaidyanathan Nagarajan</author>\r\n  <year>2003</year>\r\n  <price>49.99</price>\r\n</book>\r\n\r\n<book category=\"web\" cover=\"paperback\">\r\n  <title lang=\"en\">Learning XML</title>\r\n  <author>Erik T. Ray</author>\r\n  <year>2003</year>\r\n  <price>39.95</price>\r\n</book>\r\n\r\n</bookstore>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/code2blog_mule4_dataweave_books",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"code2blog_mule4_dataweave_books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "departments",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<DEPARTMENTS>\r\n  <DEPARTMENT LOC=\"NEW YORK\">\r\n   <NAME>ACCOUNTING</NAME>\r\n   <DEPTNO>10</DEPTNO>\r\n   <EMPLOYEES>\r\n     <EMPLOYEE>\r\n       <EMPNO>7782</EMPNO>\r\n       <NAME>CLARK</NAME>\r\n       <JOB>MANAGER</JOB>\r\n       <HIREDATE>1981-06-09</HIREDATE>\r\n       <SAL>2450</SAL>\r\n     </EMPLOYEE>\r\n     <EMPLOYEE>\r\n       <EMPNO>7839</EMPNO>\r\n       <NAME>KING</NAME>\r\n       <JOB>PRESIDENT</JOB>\r\n       <HIREDATE>1981-11-17</HIREDATE>\r\n       <SAL>5000</SAL>\r\n     </EMPLOYEE>\r\n   </EMPLOYEES>\r\n  </DEPARTMENT>\r\n  <DEPARTMENT LOC=\"DALLAS\">\r\n    <NAME>RESEARCH</NAME>\r\n    <DEPTNO>20</DEPTNO>\r\n    <EMPLOYEES>\r\n      <EMPLOYEE>\r\n        <EMPNO>7369</EMPNO>\r\n        <NAME>SMITH</NAME>\r\n        <JOB>CLERK</JOB>\r\n        <HIREDATE>1980-12-17</HIREDATE>\r\n        <SAL>800</SAL>\r\n      </EMPLOYEE>\r\n      <EMPLOYEE>\r\n        <EMPNO>7902</EMPNO>\r\n        <NAME>FORD</NAME>\r\n        <JOB>ANALYST</JOB>\r\n        <HIREDATE>1981-12-03</HIREDATE>\r\n        <SAL>3000</SAL>\r\n      </EMPLOYEE>\r\n      <EMPLOYEE>\r\n        <EMPNO>7876</EMPNO>\r\n        <NAME>ADAMS</NAME>\r\n        <JOB>CLERK</JOB>\r\n        <HIREDATE>1983-01-12</HIREDATE>\r\n        <SAL>1100</SAL>\r\n      </EMPLOYEE>\r\n    </EMPLOYEES>\r\n  </DEPARTMENT>\r\n</DEPARTMENTS>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/code2blog_mule4_dataweave_departments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"code2blog_mule4_dataweave_departments"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

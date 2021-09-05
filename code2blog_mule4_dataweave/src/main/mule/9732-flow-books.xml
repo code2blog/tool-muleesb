@@ -5,8 +5,8 @@
 	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
-	<flow name="code2blog_mule4_dataweave_booksFlow" doc:id="824ac2c3-0ec8-4f05-bd52-f68ed82c56c1" >
-		<http:listener doc:name="Listener" doc:id="6bb6de7c-9f61-4fc3-942b-a9440b475172" config-ref="HTTP_Listener_config" path="/code2blog_mule4_dataweave_books"/>
+	<flow name="9732-flow-books" doc:id="824ac2c3-0ec8-4f05-bd52-f68ed82c56c1" >
+		<http:listener doc:name="Listener" doc:id="6bb6de7c-9f61-4fc3-942b-a9440b475172" config-ref="${9732-config.http.listener}" path="/code2blog_mule4_dataweave_books"/>
 		<ee:transform doc:name="Transform Message" doc:id="061adbf1-c2d1-491c-a559-e011621b17d7" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
