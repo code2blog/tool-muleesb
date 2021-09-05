@@ -12,6 +12,7 @@ code2blog_mule4_dataweave
 	c4d-2 -> use departments.xml to demo dataweave features - flatten, mapObject
 	c4d-3 -> demo the difference between pluck and mapObject
 	c4d-4 -> demo the use of keysOf, valuesOf
+	c4d-5 -> use crc-16 instead of long form name
 	
 code2blog_mule4_connectors
 	c4c-1 -> download secure config properties module from exchange and demo encryption with database connector
