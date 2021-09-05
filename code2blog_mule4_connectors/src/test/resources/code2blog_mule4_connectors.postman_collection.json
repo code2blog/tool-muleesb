@@ -1,0 +1,121 @@
+{
+	"info": {
+		"_postman_id": "c531e60c-cb91-4f43-91bf-71228e67be11",
+		"name": "code2blog_mule4_connectors",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "validate_json",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  {\r\n    \"a\": \"hello\"\r\n  }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/code2blog_mule4_connectors_validate_json",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"code2blog_mule4_connectors_validate_json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "validate_json failure",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  {\r\n    \"a\": \"hello\",\r\n    \"b\": \"world\"\r\n  }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/code2blog_mule4_connectors_validate_json",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"code2blog_mule4_connectors_validate_json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "validate_xml",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<note xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"note.xsd\">\r\n  <to>vishnu</to>\r\n  <from>code2blog</from>\r\n  <heading>happy new year</heading>\r\n  <body>hoping for a safe and prosperous 2021</body>\r\n</note>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/code2blog_mule4_connectors_validate_xml",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"code2blog_mule4_connectors_validate_xml"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "validate_xml failure",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<note xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"note.xsd\">\r\n  <to>vishnu</to>\r\n  <from>code2blog</from>\r\n  <heading>happy new year</heading>\r\n</note>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/code2blog_mule4_connectors_validate_xml",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"code2blog_mule4_connectors_validate_xml"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
