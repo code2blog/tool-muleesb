@@ -31,5 +31,8 @@ code2blog_mule4_retry_errors
 	
 code2blog_mule4_uses_retry
 	2d7c-01 immediate retry library used as a dependency in this projects
+
+code2blog_mule4_repackage
+	7fae-01 repackage code2blog_mule4_dataweave and code2blog_mule4_connectors project into one
 	
 </pre>
