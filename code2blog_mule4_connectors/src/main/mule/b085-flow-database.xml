@@ -6,8 +6,8 @@
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
-	<flow name="code2blog_mule4_connectors_databaseFlow" doc:id="533d57e0-f8ad-45bc-a470-c357884af4f3" >
-		<http:listener doc:name="Listener" doc:id="9f7cf8e3-9887-49aa-9958-7c4abbfff41b" config-ref="HTTP_Listener_config" path="/code2blog_mule4_connectors_database"/>
+	<flow name="b085-flow-database" doc:id="533d57e0-f8ad-45bc-a470-c357884af4f3" >
+		<http:listener doc:name="Listener" doc:id="9f7cf8e3-9887-49aa-9958-7c4abbfff41b" config-ref="${b085-config.http.listener}" path="/code2blog_mule4_connectors_database"/>
 		<logger level="INFO" doc:name="Logger-IN" doc:id="a876585e-5731-4012-8346-c8222c7d5945" doc:description="Logs input message
 
 {loggerUid=Logger-IN, file=code2blog_mule4_connectors_database.xml, description='request received into flow', attributes=#[message.attributes], payload=#[payload] }" message="{loggerUid=Logger-IN, file=code2blog_mule4_connectors_database.xml, description='request received into flow', attributes=#[message.attributes], payload=#[payload] }"/>
