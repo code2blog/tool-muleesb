@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:spring="http://www.mulesoft.org/schema/mule/spring"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/spring http://www.mulesoft.org/schema/mule/spring/current/mule-spring.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="47a3f023-0f41-4bed-90c6-671f525bcae1" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="code2blog-spring-securityFlow" doc:id="d835bc97-db76-4a2c-bf77-2ead3f732295" >
+		<http:listener doc:name="Listener" doc:id="0884f96d-d7cc-477a-b347-e0809302b6ae" config-ref="HTTP_Listener_config" path="/code2blog-spring-security"/>
+		<http:basic-security-filter doc:name="Basic security filter" doc:id="e0398c54-0a7b-40fe-a940-83a857153d61" realm="mule"/>
+		<spring:authorization-filter doc:name="Authorization filter" doc:id="1c7ea006-2956-4818-957a-289589a1fd1e" requiredAuthorities="ROLE_ADMIN"/>
+		<ee:transform doc:name="json success" doc:id="c041f2c8-8f00-405f-81f2-9dbbc52e97f3" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	message: "authenticated successfully"
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>

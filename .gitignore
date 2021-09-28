@@ -30,3 +30,6 @@ target
 /code2blog_mule4_uses_retry/vp-copy.bat - Shortcut.lnk
 /code2blog_mule4_retry_errors/vp-copy.bat - Shortcut.lnk
 .mule
+*.classpath
+.project
+/code2blog-spring-security/.settings

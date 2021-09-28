@@ -34,5 +34,8 @@ code2blog_mule4_uses_retry
 
 code2blog_mule4_repackage
 	7fae-01 repackage code2blog_mule4_dataweave and code2blog_mule4_connectors project into one
+
+code2blog-spring-security
+	67b2-01 demo the use of spring security module to authenticate an api call
 	
 </pre>
