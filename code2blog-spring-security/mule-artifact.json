@@ -1,15 +1,3 @@
 {
-  "minMuleVersion": "4.3.0",
-  "secureProperties": ["db.password","sf.password","sf.token","sf.consumer_secret","email.password","cloudhub.password"],
-   "classLoaderModelLoaderDescriptor": {
-    	"id": "mule",
-    	"attributes": {
-    	"exportedPackages":[
-   "com.java.muleinuse"
-   ],
-        	"exportedResources": [
-            	"beans.xml"
-        	]
-    	}
-	}
+  "minMuleVersion": "4.3.0"
 }
